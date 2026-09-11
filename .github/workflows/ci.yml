@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run check
+      - run: npm test
+      - run: npm run build
+      - name: Smoke-test both entrypoints
+        run: |
+          node -e "const m = require('./dist/index.cjs'); if (!m.lookup('A01B')) { process.exit(1) } console.log('cjs ok')"
+          node -e "const s = require('./dist/sei.cjs'); if (s.allSeiRules().length === 0) { process.exit(1) } console.log('sei cjs ok')"
+          node -e "Promise.all([import('./dist/index.js'), import('./dist/sei.js')]).then(([m, s]) => { if (!m.lookup('A01B') || s.allSeiRules().length === 0) { process.exit(1) } console.log('esm ok') })"
