@@ -36,6 +36,5 @@ jobs:
             echo "$PKG_NAME@$PKG_VERSION is already on npm - skipping publish"
             exit 0
           fi
+          # No NODE_AUTH_TOKEN: auth comes from npm trusted publishing (OIDC)
           npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
