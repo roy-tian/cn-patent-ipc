@@ -48,8 +48,11 @@ countByType(); // { 部: 8, 大类: 132, 小类: 655, 主组: 7667, 分组: 7151
 ```
 
 Note: `ancestors` derives the chain structurally (section → class → subclass →
-main group). Subgroup-to-subgroup nesting is not recorded in IPC data and
-cannot be derived.
+main group) and returns an empty array for codes that do not exist in the
+dictionary. Subgroup-to-subgroup nesting is not recorded in IPC data and
+cannot be derived. `searchByName` throws a `TypeError` for empty or
+whitespace-only terms. Entries and arrays returned by the API are frozen —
+mutable access throws in strict mode.
 
 ## SEI API (`cn-patent-ipc/sei`)
 
@@ -71,7 +74,9 @@ Subpath imports expose the raw files:
 - `cn-patent-ipc/data/{ipc,sei,ipc-sei}.jsonl` — canonical datasets, one JSON
   object per line, sorted
 - `cn-patent-ipc/sql/postgresql/{patent_ipc,patent_sei,patent_ipc_sei}.sql` —
-  batched `INSERT`s (regenerate with `npm run generate:sql`)
+  self-contained seeds with `CREATE TABLE IF NOT EXISTS` DDL, indexes and
+  batched `INSERT`s; load `patent_ipc` and `patent_sei` before
+  `patent_ipc_sei` (FK dependencies). Regenerate with `npm run generate:sql`
 
 ```ts
 import { createRequire } from "node:module";

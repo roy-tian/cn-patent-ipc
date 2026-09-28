@@ -40,22 +40,15 @@ test("codes are unique and sorted; every entry has a known type", () => {
 });
 
 test("structural ancestor prefixes exist for class/subclass entries", () => {
+  // 预建索引后 O(n) 检查;勿在循环里用 ipc.some(),都定 O(n²) 会把 CI 拖到分钟级。
+  const codes = new Set(ipc.map((e) => e.code));
   for (const e of ipc) {
     if (e.type === "大类") {
-      assert.ok(
-        ipc.some((x) => x.code === e.code.slice(0, 1)),
-        `orphan ${e.code}`,
-      );
+      assert.ok(codes.has(e.code.slice(0, 1)), `orphan ${e.code}`);
     } else if (e.type === "小类") {
-      assert.ok(
-        ipc.some((x) => x.code === e.code.slice(0, 3)),
-        `orphan ${e.code}`,
-      );
+      assert.ok(codes.has(e.code.slice(0, 3)), `orphan ${e.code}`);
     } else if (e.type === "主组" || e.type === "分组") {
-      assert.ok(
-        ipc.some((x) => x.code === e.code.slice(0, 4)),
-        `orphan ${e.code}`,
-      );
+      assert.ok(codes.has(e.code.slice(0, 4)), `orphan ${e.code}`);
     }
   }
 });
@@ -86,16 +79,8 @@ test("sei rules: unique ids, non-empty codes, one code has multiple rules", () =
 });
 
 test("empty-name entries are carried verbatim", () => {
-  const expected = [
-    "B62D6/00",
-    "B64U",
-    "C10L1/2387",
-    "C12N9/04",
-    "C12N9/48",
-    "C12N9/78",
-    "C12P19/44",
-    "H02K21/24",
-  ];
+  // 仅这两条在 CNIPA 2026.01 版 PDF 中确实无标题(其余 6 条空名已由标题重建修复)
+  const expected = ["C12P19/64", "H02K21/24"];
   const empty = ipc.filter((e) => e.name === "").map((e) => e.code);
   assert.deepEqual(empty, expected);
 });

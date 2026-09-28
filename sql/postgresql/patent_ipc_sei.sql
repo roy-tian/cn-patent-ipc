@@ -2,6 +2,14 @@
 -- Regenerate with: npm run generate:sql
 -- IPC to SEI mapping: (ipc_code, sei_id) composite PK
 
+-- Requires patent_ipc.sql and patent_sei.sql to be loaded first (FK dependencies).
+CREATE TABLE IF NOT EXISTS patent_ipc_sei (
+  "ipc_code" text NOT NULL REFERENCES patent_ipc ("code") ON DELETE CASCADE,
+  "sei_id" integer NOT NULL REFERENCES patent_sei ("id") ON DELETE CASCADE,
+  PRIMARY KEY ("ipc_code", "sei_id")
+);
+CREATE INDEX IF NOT EXISTS patent_ipc_sei_sei_id_idx ON patent_ipc_sei ("sei_id");
+
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('A01B', 33),
 ('A01B1/00', 33),

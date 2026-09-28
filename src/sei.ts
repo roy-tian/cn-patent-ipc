@@ -1,18 +1,19 @@
+import { ipcByCode } from "./internal/ipc-index.ts";
 import { loadJsonl } from "./internal/load.ts";
 import type { IpcEntry, IpcSeiMapping, SeiRule } from "./types.ts";
 
-let seiCache: SeiRule[] | null = null;
-let mappingCache: IpcSeiMapping[] | null = null;
+let seiCache: readonly SeiRule[] | null = null;
+let mappingCache: readonly IpcSeiMapping[] | null = null;
 let seiByIdCache: Map<number, SeiRule> | null = null;
 let mappingByIpcCache: Map<string, IpcSeiMapping[]> | null = null;
 let mappingBySeiCache: Map<number, IpcSeiMapping[]> | null = null;
 
-function seiRules(): SeiRule[] {
+function seiRules(): readonly SeiRule[] {
   if (!seiCache) seiCache = loadJsonl<SeiRule>("sei.jsonl");
   return seiCache;
 }
 
-function mappings(): IpcSeiMapping[] {
+function mappings(): readonly IpcSeiMapping[] {
   if (!mappingCache) mappingCache = loadJsonl<IpcSeiMapping>("ipc-sei.jsonl");
   return mappingCache;
 }
@@ -50,9 +51,9 @@ function mappingBySei(): Map<number, IpcSeiMapping[]> {
   return mappingBySeiCache;
 }
 
-/** 全部 SEI 规则,按 id 升序;同一 seiCode 可有多条关键词规则。 */
+/** 全部 SEI 规则,按 id 升序;同一 seiCode 可有多条关键词规则。返回共享冻结数组。 */
 export function allSeiRules(): readonly SeiRule[] {
-  return seiRules().slice();
+  return seiRules();
 }
 
 /** 按 id 精确查一条规则。 */
@@ -80,14 +81,12 @@ export function ipcOfSei(query: number | string): IpcEntry[] {
       ? [seiById().get(query)].filter((r): r is SeiRule => r !== undefined)
       : seiRulesByCode(query);
   if (rules.length === 0) return [];
-  const ipcByCode = new Map(
-    loadJsonl<IpcEntry>("ipc.jsonl").map((e) => [e.code, e]),
-  );
+  const byCode = ipcByCode();
   const seen = new Set<string>();
   const result: IpcEntry[] = [];
   for (const rule of rules) {
     for (const m of mappingBySei().get(rule.id) ?? []) {
-      const entry = ipcByCode.get(m.ipcCode);
+      const entry = byCode.get(m.ipcCode);
       if (entry && !seen.has(entry.code)) {
         seen.add(entry.code);
         result.push(entry);

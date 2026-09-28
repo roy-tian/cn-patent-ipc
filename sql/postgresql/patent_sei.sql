@@ -2,6 +2,14 @@
 -- Regenerate with: npm run generate:sql
 -- SEI classification rules: id PK, sei_code, sei_name, keywords (nullable)
 
+CREATE TABLE IF NOT EXISTS patent_sei (
+  "id" integer PRIMARY KEY,
+  "sei_code" text NOT NULL,
+  "sei_name" text NOT NULL,
+  "keywords" text
+);
+CREATE INDEX IF NOT EXISTS patent_sei_code_idx ON patent_sei ("sei_code");
+
 INSERT INTO patent_sei ("id", "sei_code", "sei_name", "keywords") VALUES
 (1, '1.1', '下一代信息网络产业', NULL),
 (2, '1.1', '下一代信息网络产业', '计算机和辅助设备修理。'),

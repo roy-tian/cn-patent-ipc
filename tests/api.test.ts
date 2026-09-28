@@ -33,11 +33,15 @@ test("ancestors derives the structural chain", () => {
     ["A", "A01"],
   );
   assert.deepEqual(
-    ancestors("H10D30/02").map((e) => e.code),
+    ancestors("H10D30/01").map((e) => e.code),
     ["H", "H10", "H10D", "H10D30/00"],
   );
   assert.deepEqual(ancestors("A"), []);
   assert.deepEqual(ancestors("NOPE99"), []);
+  // 前缀结构存在但代码本身不在字典中 → 必须返回空数组,而非拼出的伪链。
+  assert.deepEqual(ancestors("A01B1/999"), []);
+  // 分组不存在时,其真实存在的主组链也不应返回。
+  assert.deepEqual(ancestors("H10D99/99"), []);
 });
 
 test("searchByName filters by term and type", () => {
@@ -45,6 +49,11 @@ test("searchByName filters by term and type", () => {
   assert.ok(subclasses.some((e) => e.code === "H10D"));
   assert.ok(subclasses.every((e) => e.name.includes("半导体")));
   assert.deepEqual(searchByName("不存在的标题XYZ"), []);
+});
+
+test("searchByName rejects empty or whitespace terms", () => {
+  assert.throws(() => searchByName(""), TypeError);
+  assert.throws(() => searchByName("   "), TypeError);
 });
 
 test("byVersion filters exactly", () => {
@@ -59,6 +68,25 @@ test("countByType sums to the total", () => {
   const total =
     counts.部 + counts.大类 + counts.小类 + counts.主组 + counts.分组;
   assert.equal(total, allIpc().length);
+});
+
+test("titles rebuilt from CNIPA 2026.01 PDFs (regression pins)", () => {
+  // 原种子转储曾发生相邻条目串位/附注并入/截断;标题已于 v0.2.0 重建
+  assert.equal(
+    lookup("A01B")?.name,
+    "农业或林业的整地；一般农业机械或农具的部件、零件或附件（用于播种、种植或施厩肥的开挖沟穴或覆盖沟穴入A01C5/00；可变换成整地设备或能够整地的割草机入A01D42/04；与整地机具联合的割草机入A01D43/12；工程目的的整地入E01，E02，E21）",
+  );
+  assert.equal(
+    lookup("H01B")?.name,
+    "电缆；导体；绝缘体；导电、绝缘或介电材料的选择（磁性材料的选择入H01F1/00；波导管入H01P）",
+  );
+  assert.equal(
+    lookup("H01B1/00")?.name,
+    "按导电材料特性区分的导体或导电物体；用作导体的材料选择（按材料特性区分的超导或高导导体、电缆或传输线入H01B12／00）〔4〕",
+  );
+  assert.equal(lookup("H04L9/06")?.name, "保密或安全通信装置；网络安全协议");
+  assert.equal(lookup("C09J7/00")?.name, "薄膜或薄片状的粘合剂");
+  assert.equal(lookup("B64U")?.name, "无人驾驶飞行器[UAV]；为此的设备");
 });
 
 test("sei subpath queries", () => {

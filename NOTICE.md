@@ -24,19 +24,32 @@ exported as the newest edition present, currently `2026.01`.
   国际专利分类参照关系表》, an official public reference document.
 
 The datasets in this repository were derived from a downstream project's seed
-dumps of those publications.
+dumps of those publications. As of v0.1.2, **Chinese titles were rebuilt from
+the official CNIPA 2026.01 PDFs** (all 8 sections): the original seed dump
+had systematically misaligned titles in ~12% of entries (adjacent-entry
+carry-over, notes and subclass indices merged into titles, truncations).
+`level` and `version` fields are still taken from the original seed; only
+`name` was rebuilt and verified entry-by-entry against the PDFs.
 
 ## Known data quirks (carried verbatim)
 
-- **8 entries have empty titles**: `B62D6/00`, `B64U`, `C10L1/2387`,
-  `C12N9/04`, `C12N9/48`, `C12N9/78`, `C12P19/44`, `H02K21/24`. They exist in
-  the upstream dump with empty names and are kept as-is.
-- **The `H01L` subtree is absent.** The subclass 半导体器件 was retired in
-  newer IPC editions; its content lives under the `H10*` subclasses (847
-  entries: H10B, H10D, H10F, …). Queries for `H01L` return nothing.
+- **2 entries have empty titles**: `C12P19/64`, `H02K21/24`. Both are printed
+  without a title in the official CNIPA 2026.01 PDF and are kept as-is.
+  (Six further empty-title entries from the original dump were repaired
+  during the 2026.01 title rebuild.)
+- **The `H01L` subtree is absent.** IPC deleted the subclass 半导体器件 in
+  the 2020.01 revision and redistributed its content into the new `H10*`
+  class (847 entries: H10B, H10D, H10F, …). This is confirmed against both
+  the CNIPA 2026.01 H-section table and WIPO's IPC-2026.01 master files
+  (EN/FR), which contain no `H01L` symbol. Queries for `H01L` return
+  nothing.
 - 257 entries carry a `NULL` version tag.
 - The mapping table matches **exact** IPC codes; hierarchical expansion (a
   subclass mapping covering all its groups) is left to the consumer.
+- Titles were extracted from PDF text; a small number may retain minor
+  layout artifacts (e.g. an unclosed parenthesis where the PDF itself drops
+  a line, or a stray edition marker). `C07C409/02` and siblings genuinely
+  begin with `-O-O-` (peroxide linkage), which is not an artifact.
 
 ## What is NOT included
 

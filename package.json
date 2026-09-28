@@ -1,6 +1,6 @@
 {
   "name": "cn-patent-ipc",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Chinese-edition IPC patent classification — 79,972 entries (section/class/subclass/group) with titles and effective editions, plus the CNIPA strategic-emerging-industry (SEI) mapping. Zero runtime dependencies. 中文版专利国际专利分类(IPC)数据:约 8 万条分类号(含名称与生效版次),附战略性新兴产业(SEI)参照映射。",
   "keywords": [
     "patent",
