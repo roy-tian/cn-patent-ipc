@@ -6,8 +6,8 @@ on:
       - "v*"
 
 permissions:
-  contents: read
-  id-token: write
+  contents: write # create the GitHub release
+  id-token: write # npm trusted publishing (OIDC)
 
 jobs:
   publish:
@@ -24,17 +24,32 @@ jobs:
       - run: npm test
       - run: npm run build
       - name: Publish (tag must match package.json version)
+        id: publish
         run: |
           TAG_VERSION="${GITHUB_REF_NAME#v}"
           PKG_VERSION="$(node -p "require('./package.json').version")"
           PKG_NAME="$(node -p "require('./package.json').name")"
           if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
             echo "tag v$TAG_VERSION does not match package $PKG_VERSION - skipping publish"
+            echo "published=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           if npm view "$PKG_NAME@$PKG_VERSION" version >/dev/null 2>&1; then
             echo "$PKG_NAME@$PKG_VERSION is already on npm - skipping publish"
+            echo "published=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           # No NODE_AUTH_TOKEN: auth comes from npm trusted publishing (OIDC)
           npm publish --provenance --access public
+          echo "published=true" >> "$GITHUB_OUTPUT"
+      - name: Create GitHub release
+        if: steps.publish.outputs.published == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # 发布成功才建 release;若已存在(如重跑)则补充生成并标记 latest
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release edit "$GITHUB_REF_NAME" --latest
+          else
+            gh release create "$GITHUB_REF_NAME" --latest --generate-notes
+          fi
