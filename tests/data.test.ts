@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 
+import { renderSql } from "../scripts/render-sql.ts";
 import { allIpc, countByType } from "../src/index.ts";
 import { allSeiRules } from "../src/sei.ts";
-import type { IpcEntry, IpcSeiMapping, SeiRule } from "../src/types.ts";
+import type { IpcSeiMapping, IpcType, SeiRule } from "../src/types.ts";
 
 const ipc = allIpc();
 
@@ -15,13 +16,13 @@ const readJsonl = <T>(file: string): T[] =>
     .map((line) => JSON.parse(line) as T);
 
 test("snapshot size and per-type counts", () => {
-  assert.equal(ipc.length, 79_972);
+  assert.equal(ipc.length, 79_978);
   assert.deepEqual(countByType(), {
     部: 8,
     大类: 132,
     小类: 655,
-    主组: 7_667,
-    分组: 71_510,
+    主组: 7_668,
+    分组: 71_515,
   });
   assert.equal(allSeiRules().length, 321);
   assert.equal(readJsonl<IpcSeiMapping>("ipc-sei.jsonl").length, 34_598);
@@ -39,16 +40,51 @@ test("codes are unique and sorted; every entry has a known type", () => {
   }
 });
 
-test("structural ancestor prefixes exist for class/subclass entries", () => {
-  // 预建索引后 O(n) 检查;勿在循环里用 ipc.some(),都定 O(n²) 会把 CI 拖到分钟级。
+test("codes and levels match their type", () => {
+  // 分类号被截断(原种子曾把 E01D101/00 截成 E01D101/0)时在这里先暴露
+  const shapes: Record<IpcType, RegExp> = {
+    部: /^[A-H]$/,
+    大类: /^[A-H]\d{2}$/,
+    小类: /^[A-H]\d{2}[A-Z]$/,
+    主组: /^[A-H]\d{2}[A-Z]\d{1,4}\/00$/,
+    分组: /^[A-H]\d{2}[A-Z]\d{1,4}\/(?!00$)\d{2,6}$/,
+  };
+  for (const e of ipc) {
+    assert.ok(
+      shapes[e.type].test(e.code),
+      `malformed ${e.type} code ${e.code}`,
+    );
+    if (e.type === "主组") {
+      assert.equal(e.level, 0, `main group ${e.code} level`);
+    } else if (e.type === "分组") {
+      // 少数分组的 level 上游即缺失(见 NOTICE.md),其余须为 1-9 的圆点层级
+      assert.ok(
+        e.level === null || (e.level >= 1 && e.level <= 9),
+        `subgroup ${e.code} level ${e.level}`,
+      );
+    } else {
+      assert.equal(e.level, null, `${e.type} ${e.code} level`);
+    }
+  }
+});
+
+test("structural ancestors exist for every class, subclass and group", () => {
+  // 预建索引后 O(n) 检查;勿在循环里用 ipc.some(),否则 O(n²) 会把 CI 拖到分钟级。
   const codes = new Set(ipc.map((e) => e.code));
   for (const e of ipc) {
     if (e.type === "大类") {
       assert.ok(codes.has(e.code.slice(0, 1)), `orphan ${e.code}`);
     } else if (e.type === "小类") {
       assert.ok(codes.has(e.code.slice(0, 3)), `orphan ${e.code}`);
-    } else if (e.type === "主组" || e.type === "分组") {
+    } else if (e.type === "主组") {
       assert.ok(codes.has(e.code.slice(0, 4)), `orphan ${e.code}`);
+    } else if (e.type === "分组") {
+      assert.ok(codes.has(e.code.slice(0, 4)), `orphan ${e.code}`);
+      const main = `${e.code.slice(0, e.code.indexOf("/"))}/00`;
+      assert.ok(
+        codes.has(main),
+        `subgroup ${e.code} has no main group ${main}`,
+      );
     }
   }
 });
@@ -85,30 +121,17 @@ test("empty-name entries are carried verbatim", () => {
   assert.deepEqual(empty, expected);
 });
 
-function parseSqlRows(sqlFile: string, rowPattern: RegExp): number {
-  const sql = readFileSync(
-    new URL(`../sql/postgresql/${sqlFile}`, import.meta.url),
-    "utf-8",
-  );
-  return [...sql.matchAll(rowPattern)].length;
-}
-
-test("committed SQL matches the JSONL payloads (row counts)", () => {
-  const ipcRow =
-    /\('[^']*(?:''[^']*)*', '[^']*(?:''[^']*)*', (?:NULL|\d+), '(?:[^']|'')*', (?:NULL|'(?:[^']|'')*')\)[,;]/g;
-  const seiRow =
-    /\(\d+, '(?:[^']|'')*', '(?:[^']|'')*', (?:NULL|'(?:[^']|'')*')\)[,;]/g;
-  const mappingRow = /\('(?:[^']|'')*', \d+\)[,;]/g;
-  assert.equal(
-    parseSqlRows("patent_ipc.sql", ipcRow),
-    readJsonl<IpcEntry>("ipc.jsonl").length,
-  );
-  assert.equal(
-    parseSqlRows("patent_sei.sql", seiRow),
-    readJsonl<SeiRule>("sei.jsonl").length,
-  );
-  assert.equal(
-    parseSqlRows("patent_ipc_sei.sql", mappingRow),
-    readJsonl<IpcSeiMapping>("ipc-sei.jsonl").length,
-  );
+test("committed SQL is byte-identical to a fresh render of the JSONL", () => {
+  // 逐字节比对而非只比行数:只改标题而忘了 npm run generate:sql 也会被拦下。
+  for (const { file, sql } of renderSql()) {
+    const committed = readFileSync(
+      new URL(`../sql/postgresql/${file}`, import.meta.url),
+      "utf-8",
+    );
+    // 不用 assert.equal:失败时它会把数 MB 的 SQL 整段打进 diff。
+    assert.ok(
+      committed === sql,
+      `sql/postgresql/${file} is stale; run npm run generate:sql`,
+    );
+  }
 });

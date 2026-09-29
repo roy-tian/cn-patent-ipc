@@ -71,7 +71,7 @@ test("countByType sums to the total", () => {
 });
 
 test("titles rebuilt from CNIPA 2026.01 PDFs (regression pins)", () => {
-  // 原种子转储曾发生相邻条目串位/附注并入/截断;标题已于 v0.2.0 重建
+  // 原种子转储曾发生相邻条目串位/附注并入/截断;标题已于 v0.1.2 重建
   assert.equal(
     lookup("A01B")?.name,
     "农业或林业的整地；一般农业机械或农具的部件、零件或附件（用于播种、种植或施厩肥的开挖沟穴或覆盖沟穴入A01C5/00；可变换成整地设备或能够整地的割草机入A01D42/04；与整地机具联合的割草机入A01D43/12；工程目的的整地入E01，E02，E21）",
@@ -87,6 +87,20 @@ test("titles rebuilt from CNIPA 2026.01 PDFs (regression pins)", () => {
   assert.equal(lookup("H04L9/06")?.name, "保密或安全通信装置；网络安全协议");
   assert.equal(lookup("C09J7/00")?.name, "薄膜或薄片状的粘合剂");
   assert.equal(lookup("B64U")?.name, "无人驾驶飞行器[UAV]；为此的设备");
+});
+
+test("E01D101 indexing group rebuilt from the CNIPA PDF (regression pins)", () => {
+  // 原种子把 PDF 中折行的分类号截掉末位(E01D101/0 等),11 条被并成 5 条;已于 v0.1.3 重建
+  assert.equal(lookup("E01D101/0"), undefined);
+  assert.equal(lookup("E01D101/2"), undefined);
+  assert.equal(lookup("E01D101/00")?.type, "主组");
+  assert.equal(lookup("E01D101/00")?.name, "桥梁的材料组成");
+  assert.equal(lookup("E01D101/28")?.level, 4);
+  assert.equal(lookup("E01D101/34")?.name, "非铁的，例如，铝");
+  assert.deepEqual(
+    ancestors("E01D101/28").map((e) => e.code),
+    ["E", "E01", "E01D", "E01D101/00"],
+  );
 });
 
 test("sei subpath queries", () => {

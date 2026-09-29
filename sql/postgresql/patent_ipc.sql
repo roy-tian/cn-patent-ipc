@@ -1,6 +1,7 @@
 -- Generated from data/ — do not edit by hand.
 -- Regenerate with: npm run generate:sql
--- IPC classification: code PK, type (部/大类/小类/主组/分组), level (0 mainGroup, 1-9 subgroup depth), name, version (effective edition)
+-- Safe to re-run: rows are upserted by primary key; rows absent from this seed are not deleted.
+-- IPC classification: code PK, type (部/大类/小类/主组/分组), level (0 main group, 1-9 subgroup depth; NULL for 部/大类/小类 and some subgroups), name, version (effective edition)
 
 CREATE TABLE IF NOT EXISTS patent_ipc (
   "code" text PRIMARY KEY,
@@ -1012,7 +1013,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A01J5/10', '分组', 2, '与挤奶杯分装的脉动器', '2006.01'),
 ('A01J5/12', '分组', 3, '带薄膜的', '2006.01'),
 ('A01J5/14', '分组', 3, '电磁控制的', '2006.01'),
-('A01J5/16', '分组', 2, '带脉动装置的挤奶杯', '2006.01');
+('A01J5/16', '分组', 2, '带脉动装置的挤奶杯', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A01J7/00', '主组', 0, '挤奶机械或设备的附件', '2006.01'),
@@ -2014,7 +2016,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A23B4/033', '分组', 2, '加入化学品（A23B4/037优先）', '2006.01'),
 ('A23B4/037', '分组', 2, '冷冻干燥', '2006.01'),
 ('A23B4/044', '分组', 1, '烟熏；烟熏装置', '2006.01'),
-('A23B4/048', '分组', 2, '加入天然烟熏剂以外的化学品', '2006.01');
+('A23B4/048', '分组', 2, '加入天然烟熏剂以外的化学品', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A23B4/052', '分组', 2, '熏烟发生器', '2006.01'),
@@ -3016,7 +3019,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A24F7/02', '分组', 1, '有可拆开的连接构件', '2006.01'),
 ('A24F7/04', '分组', 1, '带有烟雾过滤器', '2006.01'),
 ('A24F9/00', '主组', 0, '吸烟者烟斗用附件', '2006.01'),
-('A24F9/02', '分组', 1, '烟斗用的塞烟具，即填塞烟草入斗的装置（结合烟盒的入A24F23/04）', '2006.01');
+('A24F9/02', '分组', 1, '烟斗用的塞烟具，即填塞烟草入斗的装置（结合烟盒的入A24F23/04）', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A24F9/04', '分组', 1, '烟斗用清洁器件（结合烟斗的入A24F3/02）', '2006.01'),
@@ -4018,7 +4022,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A45C13/18', '分组', 1, '防止行李箱或袋被窃或丢失的装置', '2006.01'),
 ('A45C13/20', '分组', 2, '链或带', '2006.01'),
 ('A45C13/22', '分组', 2, '可分开的柄；可折入行李箱内的柄（为携带用的分离的柄入A45F5/10）', '2006.01'),
-('A45C13/24', '分组', 2, '发声、突刺、放气或类似的装置', '2006.01');
+('A45C13/24', '分组', 2, '发声、突刺、放气或类似的装置', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A45C13/26', '分组', 1, '特殊用途的柄（A45C 13/22优先）', '2006.01'),
@@ -5020,7 +5025,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A47F5/10', '分组', 1, '可调节的或可折叠的陈列台', '2006.01'),
 ('A47F5/11', '分组', 2, '由硬纸板、纸等制成的（A47F5/12优先）', '2006.01'),
 ('A47F5/12', '分组', 2, '可倾斜的台', '2006.01'),
-('A47F5/13', '分组', 2, '由管子或金属丝制成的（A47F5/12优先）', '2006.01');
+('A47F5/13', '分组', 2, '由管子或金属丝制成的（A47F5/12优先）', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A47F5/14', '分组', 1, '金属丝陈列台的管状连接部件', '2006.01'),
@@ -6022,7 +6028,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A61B5/0536', '分组', 3, '阻抗成像，例如通过层析成像', '2021.01'),
 ('A61B5/0537', '分组', 3, '通过阻抗测量身体成分，例如组织水合作用或脂肪含量', '2021.01'),
 ('A61B5/0538', '分组', 3, '侵入的，例如利用导管', '2021.01'),
-('A61B5/055', '分组', 2, '包含电磁共振〔EMR〕或核磁共振〔NMR〕的，例如磁共振成像', '2006.01');
+('A61B5/055', '分组', 2, '包含电磁共振〔EMR〕或核磁共振〔NMR〕的，例如磁共振成像', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A61B5/06', '分组', 1, '不用放射来检测或定位异物的仪器', '2006.01'),
@@ -7024,7 +7031,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A61K31/453', '分组', 7, '含有氧作为环杂原子的六元环的', '2006.01'),
 ('A61K31/4535', '分组', 7, '含有硫作为环杂原子的杂环的，例如苯唑替吩', '2006.01'),
 ('A61K31/454', '分组', 7, '含有氮作为环杂原子的五元环的，例如匹莫齐特、多潘立酮', '2006.01'),
-('A61K31/4545', '分组', 7, '含有氮作为环杂原子的六元环的，例如酰胺哌啶酮、新烟碱', '2006.01');
+('A61K31/4545', '分组', 7, '含有氮作为环杂原子的六元环的，例如酰胺哌啶酮、新烟碱', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A61K31/455', '分组', 5, '烟酸，即烟碱酸；其衍生物，例如酯，酰胺', '2006.01'),
@@ -8026,7 +8034,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A61L15/12', '分组', 2, '含有大分子材料', '2006.01'),
 ('A61L15/14', '分组', 2, '以其功能或物理性质为特征的材料的应用', '2006.01'),
 ('A61L15/16', '分组', 1, '用于生理液体如尿或血的绷带、敷料或吸收垫，例如卫生巾、棉塞〔5〕', '2006.01'),
-('A61L15/18', '分组', 2, '含有无机材料', '2006.01');
+('A61L15/18', '分组', 2, '含有无机材料', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A61L15/20', '分组', 2, '含有有机材料', '2006.01'),
@@ -9028,7 +9037,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A63B25/02', '分组', 1, '有弹性的高跷', '2006.01'),
 ('A63B25/04', '分组', 1, '有轮的', '2006.01'),
 ('A63B25/06', '分组', 1, '可使步子拉长的安装高跷的鞋', '2006.01'),
-('A63B25/08', '分组', 1, '加环箍手杖，如一种跳跃用的高跷杖', '2006.01');
+('A63B25/08', '分组', 1, '加环箍手杖，如一种跳跃用的高跷杖', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('A63B25/10', '分组', 1, '缚在脚上的弹跳鞋', '2006.01'),
@@ -10030,7 +10040,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B01D24/20', '分组', 2, '在敞开的容器中装有过滤材料', '2006.01'),
 ('B01D24/22', '分组', 3, '下滤，由可渗透表面支撑过滤材料', '2006.01'),
 ('B01D24/24', '分组', 3, '下滤，容器有分配或收集顶盖或可渗透管', '2006.01'),
-('B01D24/26', '分组', 3, '上滤', '2006.01');
+('B01D24/26', '分组', 3, '上滤', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B01D24/28', '分组', 1, '过滤期间滤床是移动的（有流体化过滤床的入B01D24/36）', '2006.01'),
@@ -11032,7 +11043,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B01J23/74', '分组', 2, '铁系金属', '2006.01'),
 ('B01J23/745', '分组', 3, '铁', '2006.01'),
 ('B01J23/75', '分组', 3, '钴', '2006.01'),
-('B01J23/755', '分组', 3, '镍', '2006.01');
+('B01J23/755', '分组', 3, '镍', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B01J23/76', '分组', 2, '与包含在23/02至23/36各组的金属，氧化物或氢氧化物结合', '2006.01'),
@@ -12034,7 +12046,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B05B7/14', '分组', 1, '用于喷射微粒物质的（B05B7/16优先）', '2006.01'),
 ('B05B7/16', '分组', 1, '配有加热被喷射物质的装置', '2006.01'),
 ('B05B7/18', '分组', 2, '物质原来是线状，杆状或其他类似形状的', '2006.01'),
-('B05B7/20', '分组', 2, '用火焰或燃烧', '2006.01');
+('B05B7/20', '分组', 2, '用火焰或燃烧', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B05B7/22', '分组', 2, '用电，如用电弧', '2006.01'),
@@ -13036,7 +13049,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B21D53/70', '分组', 2, '手柄（B21D53/72优先）', '2006.01'),
 ('B21D53/72', '分组', 2, '镰刀；大镰刀', '2006.01'),
 ('B21D53/74', '分组', 1, '开口用框架，如窗框、门框、提包框', '2006.01'),
-('B21D53/76', '分组', 1, '书写或制图用具，如写字笔、带橡皮擦的笔', '2006.01');
+('B21D53/76', '分组', 1, '书写或制图用具，如写字笔、带橡皮擦的笔', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B21D53/78', '分组', 1, '螺旋桨叶片；透平叶片', '2006.01'),
@@ -14038,7 +14052,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B23B47/06', '分组', 3, '主要使用电力方式驱动', '2006.01'),
 ('B23B47/08', '分组', 3, '主要使用液压或气动方式驱动', '2006.01'),
 ('B23B47/10', '分组', 4, '配备涡轮机或其他回转式机械的', '2006.01'),
-('B23B47/12', '分组', 4, '配备振动活塞的', '2006.01');
+('B23B47/12', '分组', 4, '配备振动活塞的', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B23B47/14', '分组', 3, '变速齿轮装置；换向齿轮装置', '2006.01'),
@@ -15040,7 +15055,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B23Q35/30', '分组', 4, '用于控制电的或电—液仿形系统', '2006.01'),
 ('B23Q35/32', '分组', 5, '其中仿形器接通或断开电接触或触点，如有电刷式仿形板', '2006.01'),
 ('B23Q35/34', '分组', 5, '其中仿形器有可变电路电气性能，如电容，频率', '2006.01'),
-('B23Q35/36', '分组', 4, '用于控制液力或气动仿形系统', '2006.01');
+('B23Q35/36', '分组', 4, '用于控制液力或气动仿形系统', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B23Q35/38', '分组', 3, '适用于无物理接触的模，模型或图样的传感（用流体喷射的方法传感入B23Q35/36）', '2006.01'),
@@ -16042,7 +16058,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B26F1/31', '分组', 2, '用辐射', '2006.01'),
 ('B26F1/32', '分组', 1, '手持打孔或冲孔装置，如锥子', '2006.01'),
 ('B26F1/34', '分组', 2, '动力致动的（与执行操作无特殊关联的轻便机动工具的零件或部件，如机壳、机体入B25F5/00）', '2006.01'),
-('B26F1/36', '分组', 2, '冲孔钳或打孔钳', '2006.01');
+('B26F1/36', '分组', 2, '冲孔钳或打孔钳', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B26F1/38', '分组', 1, '切下；冲裁', '2006.01'),
@@ -17044,7 +17061,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B29C48/435', '分组', 5, '子螺杆', '2019.01'),
 ('B29C48/44', '分组', 6, '行星螺杆', '2019.01'),
 ('B29C48/445', '分组', 4, '同轴配置的螺杆，即一根螺杆在另一根螺杆之中', '2019.01'),
-('B29C48/45', '分组', 4, '可轴向移动的螺杆', '2019.01');
+('B29C48/45', '分组', 4, '可轴向移动的螺杆', '2019.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B29C48/455', '分组', 4, '将材料传递给对方的螺杆，如分开的一个接一个排列的并且以相反方向进料的螺杆', '2019.01'),
@@ -18046,7 +18064,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B31B50/44', '分组', 2, '通过柱塞作穿过折叠模的运动', '2017.01'),
 ('B31B50/46', '分组', 3, '并且将侧壁相互连接', '2017.01'),
 ('B31B50/48', '分组', 4, '通过锁边的折叠或褶卷', '2017.01'),
-('B31B50/50', '分组', 5, '用互相咬合的舌片和切口', '2017.01');
+('B31B50/50', '分组', 5, '用互相咬合的舌片和切口', '2017.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B31B50/52', '分组', 2, '用往复运动或摆动的部件，例如指状物（通过柱塞穿过折叠模B31B50/44）', '2017.01'),
@@ -19048,7 +19067,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B41J15/10', '分组', 3, '并安装在走纸架上的', '2006.01'),
 ('B41J15/12', '分组', 3, '并与走纸架连接的', '2006.01'),
 ('B41J15/14', '分组', 3, '并与走纸架分开的', '2006.01'),
-('B41J15/16', '分组', 1, '用于拉紧或卷绕该卷筒纸的装置', '2006.01');
+('B41J15/16', '分组', 1, '用于拉紧或卷绕该卷筒纸的装置', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B41J15/18', '分组', 1, '多个卷筒纸的给纸装置', '2006.01'),
@@ -20050,7 +20070,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B42D25/29', '分组', 2, '证券，银行票据', '2014.01'),
 ('B42D25/30', '分组', 1, '标识或安全功能，例如为防止伪造', '2014.01'),
 ('B42D25/305', '分组', 2, '相关的数字信息（连同机器一起使用的记录载体，并且至少其中一部分设计带有数字标记入G06K 19/00）', '2014.01'),
-('B42D25/309', '分组', 2, '照片', '2014.01');
+('B42D25/309', '分组', 2, '照片', '2014.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B42D25/313', '分组', 2, '指纹', '2014.01'),
@@ -21052,7 +21073,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B60J10/76', '分组', 3, '用于窗框的；用于玻璃导轨的', '2016.01'),
 ('B60J10/763', '分组', 4, '高速时防止窗向外移动的', '2016.01'),
 ('B60J10/767', '分组', 4, '用于减少由窗格与窗框导轨或玻璃导轨不平直所引起的空气阻力', '2016.01'),
-('B60J10/77', '分组', 3, '用于无窗框的窗，即用于直接与车体密封所形成的无框架窗', '2016.01');
+('B60J10/77', '分组', 3, '用于无窗框的窗，即用于直接与车体密封所形成的无框架窗', '2016.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B60J10/773', '分组', 4, '高速时防止窗向外移动的', '2016.01'),
@@ -22054,7 +22076,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B60S3/04', '分组', 1, '用于陆地车辆外部的', '2006.01'),
 ('B60S3/06', '分组', 2, '用旋转体接触车辆的', '2006.01'),
 ('B60S5/00', '主组', 0, '车辆的保养、维修、修理或重装（适合于运载保养或维修车间的车辆入B60P3/14；铁路机车的保养入B61K）', '2006.01'),
-('B60S5/02', '分组', 1, '向车辆供给燃料；加油站成套设备的总体布置（将定量的汽油，润滑油或类似料由贮藏室输送到车辆上的设备入B67D）', '2006.01');
+('B60S5/02', '分组', 1, '向车辆供给燃料；加油站成套设备的总体布置（将定量的汽油，润滑油或类似料由贮藏室输送到车辆上的设备入B67D）', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B60S5/04', '分组', 1, '轮胎充气的空气供给（轮胎充气装置在车上的配置入B60C23/00；轮胎压力计入G01L17/00）', '2006.01'),
@@ -23056,7 +23079,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B62C1/04', '分组', 1, '载货车', '2006.01'),
 ('B62C1/06', '分组', 2, '可转换的，例如有可接长部件的，有可变轮距的', '2006.01'),
 ('B62C1/08', '分组', 1, '赛车，例如单座二轮马车', '2006.01'),
-('B62C11/00', '主组', 0, '其他类目不包含的保护装置，例如用于立即释放难驾驭的牵引畜的装置', '2006.01');
+('B62C11/00', '主组', 0, '其他类目不包含的保护装置，例如用于立即释放难驾驭的牵引畜的装置', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B62C11/02', '分组', 1, '用于脱开车辕的装置', '2006.01'),
@@ -24058,7 +24082,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B63B34/30', '分组', 1, '比赛专用船；附件（通过划船推进的入B63H16/00）', '2020.01'),
 ('B63B34/40', '分组', 1, '通过水下箔片支撑的身体动态支撑结构', '2020.01'),
 ('B63B34/45', '分组', 2, '附件', '2020.01'),
-('B63B34/50', '分组', 1, '身体支撑浮力装置，例如沐浴船或水循环（游泳辅助设备入A63B31/00）', '2020.01');
+('B63B34/50', '分组', 1, '身体支撑浮力装置，例如沐浴船或水循环（游泳辅助设备入A63B31/00）', '2020.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B63B34/52', '分组', 2, '可膨胀或部分可膨胀', '2020.01'),
@@ -25060,7 +25085,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B64F1/22', '分组', 1, '用于操纵飞机', '2024.01'),
 ('B64F1/221', '分组', 2, '用于操纵水上飞机', '2024.01'),
 ('B64F1/222', '分组', 2, '用于存放飞机，例如在机库里', '2024.01'),
-('B64F1/223', '分组', 2, '用于牵引飞机', '2024.01');
+('B64F1/223', '分组', 2, '用于牵引飞机', '2024.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B64F1/225', '分组', 3, '特别适用于此的车辆，例如飞机牵引车', '2024.01'),
@@ -26062,7 +26088,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B65D47/22', '分组', 3, '在挠性管上以捏挤作用操作', '2006.01'),
 ('B65D47/24', '分组', 3, '带有提升阀', '2006.01'),
 ('B65D47/26', '分组', 3, '带有滑阀，如由可滑动的倾注口形成的', '2006.01'),
-('B65D47/28', '分组', 4, '具有直线移动的', '2006.01');
+('B65D47/28', '分组', 4, '具有直线移动的', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B65D47/30', '分组', 3, '带有旋塞阀', '2006.01'),
@@ -27064,7 +27091,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B65G67/20', '分组', 3, '装载有篷车辆', '2006.01'),
 ('B65G67/22', '分组', 3, '装载移动的车辆', '2006.01'),
 ('B65G67/24', '分组', 2, '卸载陆上车辆', '2006.01'),
-('B65G67/26', '分组', 3, '使用耙或刮板', '2006.01');
+('B65G67/26', '分组', 3, '使用耙或刮板', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B65G67/28', '分组', 4, '固定到环形输送机上的外横向叶片', '2006.01'),
@@ -28066,7 +28094,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B66F3/40', '分组', 4, '可膨胀的（阀与可膨胀弹性体的连接入B60C29/00）', '2006.01'),
 ('B66F3/42', '分组', 3, '具有自备泵的，如手动泵', '2006.01'),
 ('B66F3/43', '分组', 2, '缸筒式千斤顶', '2006.01'),
-('B66F3/44', '分组', 1, '具有自备电动机的', '2006.01');
+('B66F3/44', '分组', 1, '具有自备电动机的', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('B66F3/46', '分组', 1, '具有互相联系着的提升或下降动作的几台千斤顶的联合装置', '2006.01'),
@@ -29068,7 +29097,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C01F7/066', '分组', 4, '分离残渣的处理', '2022.01'),
 ('C01F7/0666', '分组', 4, '过程控制或调节', '2022.01'),
 ('C01F7/0673', '分组', 4, '从含磷酸盐的矿物', '2022.01'),
-('C01F7/068', '分组', 4, '从含碳酸盐的矿物，例如片钠铝石', '2022.01');
+('C01F7/068', '分组', 4, '从含碳酸盐的矿物，例如片钠铝石', '2022.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C01F7/0686', '分组', 4, '从含硫酸盐的矿物，例如明矾石', '2022.01'),
@@ -30070,7 +30100,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C04B12/04', '分组', 1, '碱金属或铵的硅酸盐水泥用作砂浆，混凝土或人造石填料的材料', '2006.01'),
 ('C04B14/00', '主组', 0, '在砂浆、混凝土或人造石中使用无机材料作为填料，例如颜料；为增强其在砂浆、混凝土或人造石中的填充性能而专门采用的无机材料的处理（建筑物加强件入E04C5/00）', '2006.01'),
 ('C04B14/02', '分组', 1, '颗粒材料', '2006.01'),
-('C04B14/04', '分组', 2, '富硅材料；硅酸盐', '2006.01');
+('C04B14/04', '分组', 2, '富硅材料；硅酸盐', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C04B14/06', '分组', 3, '石英；砂', '2006.01'),
@@ -31072,7 +31103,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C07C205/34', '分组', 2, '硝基连接在六元芳环的碳原子上和醚化了的羟基连接在碳架的非环碳原子上', '2006.01'),
 ('C07C205/35', '分组', 2, '硝基和醚化了的羟基连接在碳架的六元芳环的碳原子上', '2006.01'),
 ('C07C205/36', '分组', NULL, '连接在同一个非稠合六元芳环的碳原子上或连接在同一个稠环系的六元芳环的碳原子上', '2006.01'),
-('C07C205/37', '分组', 4, '醚化了的羟基中至少1个氧原子进一步连接在非环碳原子上', '2006.01');
+('C07C205/37', '分组', 4, '醚化了的羟基中至少1个氧原子进一步连接在非环碳原子上', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C07C205/38', '分组', NULL, '醚化了的羟基中至少1个氧原子进一步连接在六元芳环的碳原子上，如硝基二苯醚', '2006.01'),
@@ -32074,7 +32106,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C07C29/154', '分组', 4, '含铜、银、金或其化合物', '2006.01'),
 ('C07C29/156', '分组', 4, '含铁族金属、铂族金属或其化合物', '2006.01'),
 ('C07C29/157', '分组', 5, '含铂族金属或其化合物', '2006.01'),
-('C07C29/158', '分组', 6, '含铑或其化合物', '2006.01');
+('C07C29/158', '分组', 6, '含铑或其化合物', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C07C29/159', '分组', 2, '用除氢气或含氢气体以外的还原剂', '2006.01'),
@@ -33076,7 +33109,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C07C49/237', '分组', 3, '含六元芳环和其他环', '2006.01'),
 ('C07C49/24', '分组', 2, '含羟基', '2006.01'),
 ('C07C49/242', '分组', 3, '含除六元芳环以外的其他环', '2006.01'),
-('C07C49/245', '分组', 3, '含六元芳环', '2006.01');
+('C07C49/245', '分组', 3, '含六元芳环', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C07C49/248', '分组', 4, '有不饱和侧链的芳环', '2006.01'),
@@ -34078,7 +34112,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C07D219/08', '分组', 2, '氮原子', '2006.01'),
 ('C07D219/10', '分组', 3, '连在位置9', '2006.01'),
 ('C07D219/12', '分组', 4, '氨烷基-氨基连在位置9', '2006.01'),
-('C07D219/14', '分组', 1, '有被氮原子取代的烃基连在环氮原子上', '2006.01');
+('C07D219/14', '分组', 1, '有被氮原子取代的烃基连在环氮原子上', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C07D219/16', '分组', 1, '有被氮原子取代的酰基连在环氮原子上', '2006.01'),
@@ -35080,7 +35115,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C07D411/04', '分组', 2, '被环原子-环原子的键直接连接', '2006.01'),
 ('C07D411/06', '分组', 2, '被仅含脂族碳原子的碳链连接的', '2006.01'),
 ('C07D411/08', '分组', 2, '被含脂环的碳链连接的', '2006.01'),
-('C07D411/10', '分组', 2, '被含芳环的碳链连接的', '2006.01');
+('C07D411/10', '分组', 2, '被含芳环的碳链连接的', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C07D411/12', '分组', 2, '被含有杂原子的链作为键链连接的', '2006.01'),
@@ -36082,7 +36118,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C08B11/04', '分组', 2, '有取代的烃基', '2006.01'),
 ('C08B11/06', '分组', 3, '有卤素取代的烃基', '2006.01'),
 ('C08B11/08', '分组', 3, '有羟基化的烃基；它的酯、醚或缩醛', '2006.01'),
-('C08B11/10', '分组', 3, '以酸基取代', '2006.01');
+('C08B11/10', '分组', 3, '以酸基取代', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C08B11/12', '分组', 4, '羧基取代', '2006.01'),
@@ -37084,7 +37121,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C08G2/22', '分组', 2, '与环氧化合物', '2006.01'),
 ('C08G2/24', '分组', 2, '与醛缩醇', '2006.01'),
 ('C08G2/26', '分组', 2, '与含有碳-碳不饱和键化合物', '2006.01'),
-('C08G2/28', '分组', 1, '聚合后处理', '2006.01');
+('C08G2/28', '分组', 1, '聚合后处理', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C08G2/30', '分组', 1, '用后处理的化学改性', '2006.01'),
@@ -38086,7 +38124,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C09B13/06', '分组', 1, '苯乙酮系的吖啶，吖嗪，嗪及噻嗪染料', '2006.01'),
 ('C09B15/00', '主组', 0, '吖啶染料', '2006.01'),
 ('C09B17/00', '主组', 0, '吖嗪染料', '2006.01'),
-('C09B17/02', '分组', 1, '苯系的', '2006.01');
+('C09B17/02', '分组', 1, '苯系的', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C09B17/04', '分组', 1, '萘系的', '2006.01'),
@@ -39088,7 +39127,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C09G1/14', '分组', 2, '基于非蜡物质的', '2006.01'),
 ('C09G1/16', '分组', 3, '基于天然或合成树脂的', '2006.01'),
 ('C09G1/18', '分组', 3, '基于其他物质的', '2006.01'),
-('C09G3/00', '主组', 0, '滑雪履蜡', '2006.01');
+('C09G3/00', '主组', 0, '滑雪履蜡', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C09H', '小类', NULL, '动物胶或明胶的制备', '2006.01'),
@@ -40090,7 +40130,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C10G51/04', '分组', 2, '仅包括热裂解和催化裂化步骤的', '2006.01'),
 ('C10G51/06', '分组', 1, '仅多级并联的', '2006.01'),
 ('C10G53/00', '主组', 0, '在不存在氢的情况下，用两步或多步精制工艺过程处理烃油', '2006.01'),
-('C10G53/02', '分组', 1, '仅多级串联的', '2006.01');
+('C10G53/02', '分组', 1, '仅多级串联的', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C10G53/04', '分组', 2, '至少包括1个萃取工艺步骤的', '2006.01'),
@@ -41092,7 +41133,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C11D9/04', '分组', NULL, '含非皂配料组分的', '2006.01'),
 ('C11D9/06', '分组', 2, '无机化合物', '2006.01'),
 ('C11D9/08', '分组', 3, '水溶性化合物', '2006.01'),
-('C11D9/10', '分组', 4, '盐', '2006.01');
+('C11D9/10', '分组', 4, '盐', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C11D9/12', '分组', 5, '碳酸盐', '2006.01'),
@@ -42094,7 +42136,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C21B7/22', '分组', 1, '除尘装置', '2006.01'),
 ('C21B7/24', '分组', 1, '探料尺或其他检测装置', '2006.01'),
 ('C21B9/00', '主组', 0, '高炉用热风炉', '2006.01'),
-('C21B9/02', '分组', 1, '砖砌热风炉', '2006.01');
+('C21B9/02', '分组', 1, '砖砌热风炉', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C21B9/04', '分组', 2, '带有燃烧炉身的', '2006.01'),
@@ -43096,7 +43139,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C25B11/043', '分组', 3, '碳，例如金刚石或石墨烯', '2021.01'),
 ('C25B11/044', '分组', 4, '碳的浸渍', '2021.01'),
 ('C25B11/045', '分组', 3, '汞或汞齐', '2021.01'),
-('C25B11/046', '分组', 3, '合金', '2021.01');
+('C25B11/046', '分组', 3, '合金', '2021.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('C25B11/047', '分组', 3, '陶瓷', '2021.01'),
@@ -44098,7 +44142,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('D01H5/42', '分组', 4, '用电动延时装置', '2006.01'),
 ('D01H5/44', '分组', 2, '牵伸元件的调节，如改变罗拉中心距', '2006.01'),
 ('D01H5/46', '分组', 2, '加重装置', '2006.01'),
-('D01H5/48', '分组', 3, '用重锤', '2006.01');
+('D01H5/48', '分组', 3, '用重锤', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('D01H5/50', '分组', 3, '用弹簧', '2006.01'),
@@ -45100,7 +45145,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('D05B29/04', '分组', 1, '皮革缝纫机的压布机构', '2006.01'),
 ('D05B29/06', '分组', 1, '压脚', '2006.01'),
 ('D05B29/08', '分组', 2, '由可以相对运动的部件组成', '2006.01'),
-('D05B29/10', '分组', 2, '带滚轴', '2006.01');
+('D05B29/10', '分组', 2, '带滚轴', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('D05B29/12', '分组', 1, '压脚附件', '2006.01'),
@@ -46102,7 +46148,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('D06M13/388', '分组', 2, '氧化胺', '2006.01'),
 ('D06M13/392', '分组', 2, '亚硝基化合物；硝基化合物', '2006.01'),
 ('D06M13/395', '分组', 2, '异氰酸盐', '2006.01'),
-('D06M13/398', '分组', 3, '含氟原子', '2006.01');
+('D06M13/398', '分组', 3, '含氟原子', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('D06M13/402', '分组', 2, '酰胺', '2006.01'),
@@ -47104,7 +47151,8 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('E01B35/00', '主组', 0, '修筑轨道用的测量仪器或设备的应用（机车或车辆上用的显示或记录不良轨段的仪器入B61K9/00；一般测量角度、直线尺寸或不规则形状的入G01B，G01C）', '2006.01'),
 ('E01B35/02', '分组', 1, '用于定距；线路横向找平；用于曲线定位的', '2006.01'),
 ('E01B35/04', '分组', 2, '装有轮子的设备', '2006.01'),
-('E01B35/06', '分组', 1, '用于测量纵向不规则形状的', '2006.01');
+('E01B35/06', '分组', 1, '用于测量纵向不规则形状的', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
 
 INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('E01B35/08', '分组', 2, '用于水准测量的', '2006.01'),
@@ -47299,11 +47347,17 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('E01C9/10', '分组', 1, '钢格栅(排水格栅入E03F5/06；用作一般建筑构件入E04C)', '2006.01'),
 ('E01D', '小类', NULL, '桥梁（在航站楼和飞机之间架设的供乘客上下飞机用的桥入B64F1/305）', '2006.01'),
 ('E01D1/00', '主组', 0, '一般的桥梁（以结构类型为特征的入E01D4/00至E01D15/00）', '2006.01'),
-('E01D101/0', '分组', NULL, '0桥梁的材料组成', '2006.01'),
-('E01D101/1', '分组', NULL, '0木材', '2006.01'),
-('E01D101/2', '分组', NULL, '0混凝土、石料或类似石的材料E01D101/22砌石；砖E01D101/24混凝土E01D101/26加钢筋的E01D101/28预应力的', '2006.01'),
-('E01D101/3', '分组', NULL, '0金属(E01D101/26优先)E01D101/32预应力的E01D101/34非铁的，例如，铝', '2006.01'),
-('E01D101/4', '分组', NULL, '0塑料', '2006.01'),
+('E01D101/00', '主组', 0, '桥梁的材料组成', '2006.01'),
+('E01D101/10', '分组', 1, '木材', '2006.01'),
+('E01D101/20', '分组', 1, '混凝土、石料或类似石的材料', '2006.01'),
+('E01D101/22', '分组', 2, '砌石；砖', '2006.01'),
+('E01D101/24', '分组', 2, '混凝土', '2006.01'),
+('E01D101/26', '分组', 3, '加钢筋的', '2006.01'),
+('E01D101/28', '分组', 4, '预应力的', '2006.01'),
+('E01D101/30', '分组', 1, '金属(E01D101/26优先)', '2006.01'),
+('E01D101/32', '分组', 2, '预应力的', '2006.01'),
+('E01D101/34', '分组', 2, '非铁的，例如，铝', '2006.01'),
+('E01D101/40', '分组', 1, '塑料', '2006.01'),
 ('E01D11/00', '主组', 0, '悬索式斜拉桥', '2006.01'),
 ('E01D11/02', '分组', 1, '悬索桥', '2006.01'),
 ('E01D11/04', '分组', 1, '斜拉桥', '2006.01'),
@@ -48100,15 +48154,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('E04B2/10', '分组', 4, '通过在构件内的小槽中或构件之间的槽口内填充加筋或不加筋的材料', '2006.01'),
 ('E04B2/12', '分组', 3, '使用其形状不同于平行六面体的构件', '2006.01'),
 ('E04B2/14', '分组', 2, '在构件内而不是在构件之间有空腔的墙，即每一个空腔至少由构成单根构件的四边所封闭', '2006.01'),
-('E04B2/16', '分组', 3, '用具有使位置稳定专门设施的构件', '2006.01'),
+('E04B2/16', '分组', 3, '用具有使位置稳定专门设施的构件', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('E04B2/18', '分组', 4, '通过突出部分或插入件与凹槽相互锁结，例如，用企口榫、槽、燕尾榫', '2006.01'),
 ('E04B2/20', '分组', 4, '通过在构件内的小槽中或构件之间的槽口内填充加筋或不加筋的材料', '2006.01'),
 ('E04B2/22', '分组', 3, '使用其形状不同于平行六面体的构件', '2006.01'),
 ('E04B2/24', '分组', 3, '以有些空腔被填实以起到承重柱或梁作用为特征的墙', '2006.01'),
 ('E04B2/26', '分组', 3, '以空腔被全部填实以形成实墙结构为特征的墙', '2006.01'),
-('E04B2/28', '分组', 2, '在构件之间而不是在构件之内有空腔的墙；由两个或更多个用隔撑彼此隔开的部分组成的墙体构件，所有部件均为实心的', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('E04B2/28', '分组', 2, '在构件之间而不是在构件之内有空腔的墙；由两个或更多个用隔撑彼此隔开的部分组成的墙体构件，所有部件均为实心的', '2006.01'),
 ('E04B2/30', '分组', 3, '用带有使位置稳定专门设施的构件；空心墙的隔撑', '2006.01'),
 ('E04B2/32', '分组', 4, '通过突出部分或插入件与凹槽相互锁结，例如，用企口榫、槽、燕尾榫', '2006.01'),
 ('E04B2/34', '分组', 4, '通过在构件内的小槽中或构件之间的槽口内填充加筋或不加筋的材料', '2006.01'),
@@ -49102,15 +49157,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('E05C17/62', '分组', 2, '用槽口', '2006.01'),
 ('E05C17/64', '分组', 2, '靠摩擦', '2006.01'),
 ('E05C19/00', '主组', 0, '特别设计的固紧翼扇的其他器件（额外用于栓接的活动式压缩封闭入E06B7/18）', '2006.01'),
-('E05C19/02', '分组', 1, '自动挡，即用拉或压翼扇的方法打开的（E05C19/06优先）', '2006.01'),
+('E05C19/02', '分组', 1, '自动挡，即用拉或压翼扇的方法打开的（E05C19/06优先）', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('E05C19/04', '分组', 2, '弹子或滚珠闩', '2006.01'),
 ('E05C19/06', '分组', 1, '装置内固定件是弹簧构成的或用弹簧带动的并只由弹簧变形移动，例如，锁簧', '2006.01'),
 ('E05C19/08', '分组', 1, '搭扣；搭扣紧固件；及其弹簧挡', '2006.01'),
 ('E05C19/10', '分组', 1, '钩形紧固件；其链环与固定的钩形件相结合的紧固件', '2006.01'),
 ('E05C19/12', '分组', 2, '以转动式安装的', '2006.01'),
-('E05C19/14', '分组', 3, '有套环动作的', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('E05C19/14', '分组', 3, '有套环动作的', '2006.01'),
 ('E05C19/16', '分组', 1, '用磁力或电磁吸力固定翼扇的器件', '2006.01'),
 ('E05C19/18', '分组', 1, '用于专门固定翼扇的便携式器件（阻止把手的运转入E05B13/00）', '2006.01'),
 ('E05C21/00', '主组', 0, 'E05C1/00至E05C19/00中任何单一大组不包括的翼扇紧固、固定或支承器件的配置与组合', '2006.01'),
@@ -50104,15 +50160,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('E21D11/12', '分组', 2, '在施工期间用的临时支架；附件', '2006.01'),
 ('E21D11/14', '分组', 1, '主要用金属衬砌的', '2006.01'),
 ('E21D11/15', '分组', 2, '板材衬砌；护壁，即为撑托结构材料或将载荷传递给主支护件而设计的衬砌(隔层入E21D11/38)', '2006.01'),
-('E21D11/18', '分组', 2, '拱形部件', '2006.01'),
+('E21D11/18', '分组', 2, '拱形部件', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('E21D11/20', '分组', 3, '特殊断面的，例如，波纹状的', '2006.01'),
 ('E21D11/22', '分组', 3, '用于以刚性连接方式或者以遇到过大压力时允许拱形部件产生滑动的方式连接相邻拱形部件的夹子或其他可缩性装置', '2006.01'),
 ('E21D11/24', '分组', 3, '拱形件间的铰链接头或钩环', '2006.01'),
 ('E21D11/26', '分组', 3, '将拱形件连接到纵向支撑构件上的鞋座', '2006.01'),
 ('E21D11/28', '分组', 2, '纵向支撑构件', '2006.01'),
-('E21D11/30', '分组', 2, '下拱形件的底座(支柱用的入E21D15/54)', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('E21D11/30', '分组', 2, '下拱形件的底座(支柱用的入E21D15/54)', '2006.01'),
 ('E21D11/34', '分组', 2, '垂直支柱与水平顶梁之间的接头(形成支柱一部分的柱帽入E21D15/54)', '2006.01'),
 ('E21D11/36', '分组', 2, '非规则断面隧道或平硐专用的衬砌物或支架', '2006.01'),
 ('E21D11/38', '分组', 1, '防水(一般防水入E02D31/00)；隔热；隔音；电绝缘(一般房屋建筑用的入E04B1/62)', '2006.01'),
@@ -51106,15 +51163,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F02B39/16', '分组', 1, '泵的其他安全措施或泵的其他控制', '2006.01'),
 ('F02B41/00', '主组', 0, '以用于增加由热能或压力能转换为机械功的特殊装置为特征的发动机', '2006.01'),
 ('F02B41/02', '分组', 1, '带有膨胀延伸的发动机', '2006.01'),
-('F02B41/04', '分组', 2, '在主汽缸内', '2006.01'),
+('F02B41/04', '分组', 2, '在主汽缸内', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F02B41/06', '分组', 2, '在复式汽缸内', '2006.01'),
 ('F02B41/08', '分组', 3, '二冲程复式发动机', '2006.01'),
 ('F02B41/10', '分组', 2, '利用废气涡轮（用于进气的废气涡轮入F02B37/00）用非液体燃料工作的发动机；包括该种发动机的设备，即燃料产生装置与发动机组合的装置', '2006.01'),
 ('F02B43/00', '主组', 0, '以使用气态燃料工作为特征的发动机；包括该种发动机的设备（以通过另外一种燃料压缩起燃来点燃汽油—空气为特征的发动机入F02B7/06；可从汽油转变为其他燃料的发动机入F02B69/04）', '2006.01'),
 ('F02B43/02', '分组', 1, '以提高工作效率的装置为特点的发动机', '2006.01'),
-('F02B43/04', '分组', 2, '用于改善燃烧效率', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('F02B43/04', '分组', 2, '用于改善燃烧效率', '2006.01'),
 ('F02B43/06', '分组', 2, '用于增加进气量', '2006.01'),
 ('F02B43/08', '分组', 1, '以发动机使用从固态燃料，如木柴在设备中产生气态燃料为特征的装置', '2006.01'),
 ('F02B43/10', '分组', 1, '以使用其他特殊气体为特征的，如乙炔、氢氧为特点的发动机或装置', '2006.01'),
@@ -52108,15 +52166,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F02P1/08', '分组', 1, '线路的布置', '2006.01'),
 ('F02P11/00', '主组', 0, '不包含在其他类目中的电火花点火的安全装置', '2006.01'),
 ('F02P11/02', '分组', 1, '发动机或发动机传动装置的故障的预防', '2006.01'),
-('F02P11/04', '分组', NULL, '发动机未经允许而使用的预防（车辆的入B60R25/04；点火闭锁装置入H01H27/00）', '2006.01'),
+('F02P11/04', '分组', NULL, '发动机未经允许而使用的预防（车辆的入B60R25/04；点火闭锁装置入H01H27/00）', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F02P11/06', '分组', 1, '危险状况的指示与内燃机其他部件结构上组合在一起的火花塞（带有燃料喷射器的入F02M57/06）', '2006.01'),
 ('F02P13/00', '主组', 0, '与内燃机其他部件结构上组合在一起的火花塞（带有燃料喷射器的入F02M57/06）', '2006.01'),
 ('F02P15/00', '主组', 0, '具有不包含在组F02P1/00至F02P13/00中或与上述各组无关的特征的电火花点火', '2006.01'),
 ('F02P15/02', '分组', 1, '具有两个或多个火花塞的配置', '2006.01'),
 ('F02P15/04', '分组', 1, '其中1个火花电极是安装在发动机工作活塞上', '2006.01'),
-('F02P15/06', '分组', 1, '通过发动机工作汽缸压缩触发的电火花', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('F02P15/06', '分组', 1, '通过发动机工作汽缸压缩触发的电火花', '2006.01'),
 ('F02P15/08', '分组', NULL, '具有多路火花点火，即在1个发动机汽缸内的不同位置上或两个或多个分开的发动机汽缸内同时发生点火', '2006.01'),
 ('F02P15/10', '分组', 1, '具有连续的电火花', '2006.01'),
 ('F02P15/12', '分组', 1, '具有在起动期间强化火花用的装置', '2006.01'),
@@ -53110,15 +53169,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F16B12/10', '分组', NULL, '使用木钉、栓、榫头、夹、卡箍，或类似元件（胶接入F16B12/04；紧固装置本身入F16B15/00至F16B47/00）', '2006.01'),
 ('F16B12/12', '分组', 2, '用于非金属家具零件，如木制的、塑料制的', '2006.01'),
 ('F16B12/14', '分组', 3, '使用螺栓或螺钉', '2006.01'),
-('F16B12/16', '分组', 4, '使用自攻螺钉', '2006.01'),
+('F16B12/16', '分组', 4, '使用自攻螺钉', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F16B12/18', '分组', 4, '使用拉杆', '2006.01'),
 ('F16B12/20', '分组', 3, '使用夹、卡箍、楔、滑动栓或类似元件', '2006.01'),
 ('F16B12/22', '分组', 3, '使用键孔形槽和销', '2006.01'),
 ('F16B12/24', '分组', 3, '使用另外的销，销钉或类似元件', '2006.01'),
 ('F16B12/26', '分组', 3, '使用快动作元件', '2006.01'),
-('F16B12/28', '分组', 2, '用于金属家具零件', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('F16B12/28', '分组', 2, '用于金属家具零件', '2006.01'),
 ('F16B12/30', '分组', 3, '使用螺栓', '2006.01'),
 ('F16B12/32', '分组', 3, '使用夹、卡箍、楔、滑动栓或类似元件', '2006.01'),
 ('F16B12/34', '分组', 3, '使用键孔形槽和销', '2006.01'),
@@ -54112,15 +54172,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F16F7/01', '分组', 1, '利用松散微粒之间的摩擦，如砂子', '2006.01'),
 ('F16F7/02', '分组', NULL, '带有压在一起的相对旋转的摩擦面（F16F7/01优先；元件之一是弹簧的入F16F13/02）', '2006.01'),
 ('F16F7/04', '分组', 2, '在旋转轴方向', '2006.01'),
-('F16F7/06', '分组', 2, '在垂直于或倾斜于旋转轴方向', '2006.01'),
+('F16F7/06', '分组', 2, '在垂直于或倾斜于旋转轴方向', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F16F7/08', '分组', 1, '带有可相互作直线移动的摩擦面（F16F7/01优先）', '2006.01'),
 ('F16F7/09', '分组', 2, '在缸—活塞式阻尼器中', '2006.01'),
 ('F16F7/10', '分组', 1, '利用惯性效应', '2006.01'),
 ('F16F7/104', '分组', 2, '惯性件是弹性设置的', '2006.01'),
 ('F16F7/108', '分组', 3, '在塑料弹簧上', '2006.01'),
-('F16F7/112', '分组', 3, '在流体弹簧上', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('F16F7/112', '分组', 3, '在流体弹簧上', '2006.01'),
 ('F16F7/116', '分组', 3, '在金属弹簧上', '2006.01'),
 ('F16F7/12', '分组', 1, '利用元件的塑性变形', '2006.01'),
 ('F16F7/14', '分组', 1, '缆索支架式，即摩擦接合的环形缆索', '2006.01'),
@@ -55114,15 +55175,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F16K43/00', '主组', 0, '在阀内的辅助闭合装置，在修理阀时，如清洗阀时，能承担正常闭合装置的功能；为相同目的而临时替换阀零件的装置', '2006.01'),
 ('F16K47/00', '主组', 0, '在阀内吸收流体能量的装置（用于管子的入F16L55/00）', '2006.01'),
 ('F16K47/02', '分组', 1, '用于防止水击或噪声', '2006.01'),
-('F16K47/04', '分组', 1, '用于减压，其节流包括在闭合元件内', '2006.01'),
+('F16K47/04', '分组', 1, '用于减压，其节流包括在闭合元件内', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F16K47/06', '分组', 2, '节流取螺旋槽形式', '2006.01'),
 ('F16K47/08', '分组', 1, '用于减压，并有一个节流元件和闭合元件分开', '2006.01'),
 ('F16K47/10', '分组', NULL, '其中介质必须在一个方向流过节流槽，在另一方向可流过一个与节流槽平行的更宽的槽', '2006.01'),
 ('F16K47/12', '分组', 2, '节流槽为螺旋形', '2006.01'),
 ('F16K47/14', '分组', 2, '节流元件为多孔膜', '2006.01'),
-('F16K47/16', '分组', 2, '节流元件为锥体', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('F16K47/16', '分组', 2, '节流元件为锥体', '2006.01'),
 ('F16K49/00', '主组', 0, '在阀内或阀上用于加热或冷却的装置（用于管子入F16L53/00；有关管子或管系统的绝热入F16L59/16）', '2006.01'),
 ('F16K5/00', '主组', 0, '只包含切断装置的龙头或旋塞，切断装置至少有一个密封面的形状近于旋转实体的完整表面，启闭运动主要是旋转运动（提升阀型的龙头入F16K1/00）', '2006.01'),
 ('F16K5/02', '分组', 1, '带有锥形表面的塞子；其所用填料', '2006.01'),
@@ -56116,15 +56178,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F21V11/14', '分组', 2, '带有许多小孔的', '2006.01'),
 ('F21V11/16', '分组', 1, '使用无孔薄片的，例如固定的', '2006.01'),
 ('F21V11/18', '分组', 2, '可动的，例如折板、滑板', '2006.01'),
-('F21V13/00', '主组', 0, '借助于在大组F21V1/00至F21V11/00中的两个或更多个组中规定的元件的组合使发出的光产生特殊的性能和分布（通过调节元件控制发光的分布入F21V14/00）', '2006.01'),
+('F21V13/00', '主组', 0, '借助于在大组F21V1/00至F21V11/00中的两个或更多个组中规定的元件的组合使发出的光产生特殊的性能和分布（通过调节元件控制发光的分布入F21V14/00）', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F21V13/02', '分组', 1, '仅为两种元件的组合', '2006.01'),
 ('F21V13/04', '分组', 2, '元件为折射器和反射器', '2006.01'),
 ('F21V13/06', '分组', 3, '反射器是可转动的', '2006.01'),
 ('F21V13/08', '分组', 2, '元件为滤光器或光致发光元件和反射器', '2006.01'),
 ('F21V13/10', '分组', 2, '元件为反射器和光屏', '2006.01'),
-('F21V13/12', '分组', 1, '仅为3种元件的组合', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('F21V13/12', '分组', 1, '仅为3种元件的组合', '2006.01'),
 ('F21V13/14', '分组', 2, '元件为滤光器或光致发光元件，反射器和折射器', '2006.01'),
 ('F21V14/00', '主组', 0, '借助于调节元件控制发光的分布（带有曲率调节的反射器入F21V7/16；带有控制光强或颜色装置的滤光器或类似物入F21V9/40；使用可调节的平行叠片或条带的遮光屏入F21V11/04；采用光阑型隔膜的荧光屏入F21V11/10；使用可动无孔薄片的遮光屏入F21V11/18；照明装置的可调节支撑物入F21V21/14）', '2018.01'),
 ('F21V14/02', '分组', 1, '通过移动光源', '2006.01'),
@@ -57118,15 +57181,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F23N5/10', '分组', 2, '利用热电偶的', '2006.01'),
 ('F23N5/12', '分组', 2, '利用对电离敏感的元件的，即火焰棒', '2006.01'),
 ('F23N5/14', '分组', 2, '利用热敏电阻的', '2006.01'),
-('F23N5/16', '分组', 1, '利用噪声检测器的', '2006.01'),
+('F23N5/16', '分组', 1, '利用噪声检测器的', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F23N5/18', '分组', 1, '利用对空气或燃料流动速率敏感的探测器', '2006.01'),
 ('F23N5/20', '分组', 1, '带有一个通过电气装置（例如利用延时继电器），控制的时间程序', '2006.01'),
 ('F23N5/22', '分组', 1, '带有一个通过机械装置（例如利用凸轮），控制的时间程序', '2006.01'),
 ('F23N5/24', '分组', 1, '防止产生反常和意外情况的，即安全装置（F23N5/02至F23N5/18优先）', '2006.01'),
 ('F23N5/26', '分组', 1, '零部件', '2006.01'),
-('F23Q', '小类', NULL, '点火（点燃火柴的装置入A24F；化学点火器入C06C9/00）；灭火装置', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('F23Q', '小类', NULL, '点火（点燃火柴的装置入A24F；化学点火器入C06C9/00）；灭火装置', '2006.01'),
 ('F23Q1/00', '主组', 0, '机械点火（装有燃料的点火器入F23Q2/00；火柴入C06F）', '2006.01'),
 ('F23Q1/02', '分组', 1, '利用摩擦或冲击作用的', '2006.01'),
 ('F23Q1/04', '分组', 2, '作用在通过燃料控制元件带动的零件上，例如用煤气灶开关', '2006.01'),
@@ -58120,15 +58184,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F25C1/12', '分组', 1, '在冷却表面冻结冰，例如形成冰板', '2006.01'),
 ('F25C1/14', '分组', 2, '形成通过铲刮或推挤可取下的冰冻薄板，例如制成片冰形式', '2018.01'),
 ('F25C1/142', '分组', 3, '从冷冻体外部', '2018.01'),
-('F25C1/145', '分组', 3, '从冷冻体内部', '2018.01'),
+('F25C1/145', '分组', 3, '从冷冻体内部', '2018.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F25C1/147', '分组', 4, '用螺丝钻', '2018.01'),
 ('F25C1/16', '分组', 1, '通过在真空中局部蒸发水', '2006.01'),
 ('F25C1/18', '分组', 1, '制作特别透明或半透明的冰，例如用注入空气法', '2006.01'),
 ('F25C1/20', '分组', 2, '用搅拌法', '2006.01'),
 ('F25C1/22', '分组', 1, '型模结构；模型用装填设备', '2018.01'),
-('F25C1/24', '分组', 2, '用于冷冻设备的，例如冻结托盘', '2018.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('F25C1/24', '分组', 2, '用于冷冻设备的，例如冻结托盘', '2018.01'),
 ('F25C1/243', '分组', 3, '塑料模型，例如：硅胶的', '2018.01'),
 ('F25C1/246', '分组', 3, '带有分离格栅结构的模型', '2018.01'),
 ('F25C1/25', '分组', 2, '模型用装填设备', '2018.01'),
@@ -59122,15 +59187,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F41A9/58', '分组', 2, '子弹止动器；子弹定位器', '2006.01'),
 ('F41A9/59', '分组', 1, '用于弹夹或弹匣的推顶器，例如当空的时', '2006.01'),
 ('F41A9/60', '分组', 1, '空弹壳或条带式链条聚集器或收集器（F41A9/81优先）', '2006.01'),
-('F41A9/61', '分组', 1, '弹匣', '2006.01'),
+('F41A9/61', '分组', 1, '弹匣', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('F41A9/62', '分组', NULL, '具有显示弹匣内剩余子弹数量的装置，例如最后一发子弹指示器（最后一发子弹保险装置入F41A17/40）', '2006.01'),
 ('F41A9/63', '分组', 2, '专门适用于与其他弹匣可解脱的连接', '2006.01'),
 ('F41A9/64', '分组', 2, '用于无弹带弹药', '2006.01'),
 ('F41A9/65', '分组', 3, '具有子弹输弹装置的盒式弹匣', '2006.01'),
 ('F41A9/66', '分组', 4, '用于装药,即再装填的装置（用于弹匣再装填的装置或工具入F41A9/83）', '2006.01'),
-('F41A9/67', '分组', 5, '具有压下子弹输弹装置的机构，或用于把子弹锁在受压的位置', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('F41A9/67', '分组', 5, '具有压下子弹输弹装置的机构，或用于把子弹锁在受压的位置', '2006.01'),
 ('F41A9/68', '分组', 4, '多个弹匣,例如串联弹匣', '2006.01'),
 ('F41A9/69', '分组', 4, '其特征在于多排或盘旋弯曲的子弹安排', '2006.01'),
 ('F41A9/70', '分组', 4, '释入，例如子弹导向装置或释放弹颈的装置', '2006.01'),
@@ -60124,15 +60190,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G01C17/02', '分组', 1, '磁罗盘', '2006.01'),
 ('G01C17/04', '分组', 2, '具有指北的磁性元件，例如磁针', '2006.01'),
 ('G01C17/06', '分组', 3, '悬置磁性元件', '2006.01'),
-('G01C17/08', '分组', 4, '浮动悬置的', '2006.01'),
+('G01C17/08', '分组', 4, '浮动悬置的', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G01C17/10', '分组', 3, '将所观测的方向与指北方向比较', '2006.01'),
 ('G01C17/12', '分组', 4, '应用照准装置，例如对测量罗盘', '2006.01'),
 ('G01C17/14', '分组', 4, '应用参考标记，例如对船用罗盘', '2006.01'),
 ('G01C17/16', '分组', 4, '应用磁倾仪，例如对测定磁倾角或地层的走向', '2006.01'),
 ('G01C17/18', '分组', 3, '罗盘的支承或悬挂，例如应用常平架，应用浮动装置', '2006.01'),
-('G01C17/20', '分组', 3, '对罗盘的方位牌或磁针进行观测', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('G01C17/20', '分组', 3, '对罗盘的方位牌或磁针进行观测', '2006.01'),
 ('G01C17/22', '分组', 4, '应用投影法', '2006.01'),
 ('G01C17/24', '分组', 4, '照明装置', '2006.01'),
 ('G01C17/26', '分组', 4, '应用电传感器传输至终端指示器，例如光电池', '2006.01'),
@@ -61126,15 +61193,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G01L21/26', '分组', NULL, '利用辐射作用的，即利用由较热构件进入到较冷构件的分子动量引起的压力的作用的；孔德森（Knudsen）型真空计', '2006.01'),
 ('G01L21/28', '分组', 2, '利用回转测量元件扭矩的', '2006.01'),
 ('G01L21/30', '分组', 1, '利用电离效应的', '2006.01'),
-('G01L21/32', '分组', 2, '应用具有热阴极的放电管', '2006.01'),
+('G01L21/32', '分组', 2, '应用具有热阴极的放电管', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G01L21/34', '分组', 2, '应用具有冷阴极的放电管', '2006.01'),
 ('G01L21/36', '分组', 2, '应用放射性物质', '2006.01'),
 ('G01L23/00', '主组', 0, '用于测量、指示或记录蒸汽、气体或液体压力的振荡等快速变化的设备或仪表；由工作流体的状态测定蒸汽机、内燃机或其他流体压力发动机的功或能量的指示器', '2006.01'),
 ('G01L23/02', '分组', 1, '含有机械指示或记录装置和含有受载或复位弹簧的', '2006.01'),
 ('G01L23/04', '分组', 1, '含有承受已知的平衡压力的装置的', '2006.01'),
-('G01L23/06', '分组', 1, '含有光学指示或记录装置的', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('G01L23/06', '分组', 1, '含有光学指示或记录装置的', '2006.01'),
 ('G01L23/08', '分组', 1, '电操作的', '2006.01'),
 ('G01L23/10', '分组', 2, '采用压电型的压敏元件', '2006.01'),
 ('G01L23/12', '分组', 2, '通过改变电容量和电感量的', '2006.01'),
@@ -62128,15 +62196,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G01R11/25', '分组', NULL, '用于指示故障或对故障发出信号的装置〔2，4〕', '2006.01'),
 ('G01R11/30', '分组', 1, '电动式仪表', '2006.01'),
 ('G01R11/32', '分组', 2, '瓦时计', '2006.01'),
-('G01R11/34', '分组', 2, '安时计', '2006.01'),
+('G01R11/34', '分组', 2, '安时计', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G01R11/36', '分组', 1, '感应式仪表，例如费拉里（Ferraris）仪表', '2006.01'),
 ('G01R11/38', '分组', 2, '用于单相运转的', '2006.01'),
 ('G01R11/40', '分组', 2, '用于多相运转的', '2006.01'),
 ('G01R11/42', '分组', 3, '所用的电路', '2006.01'),
 ('G01R11/46', '分组', 1, '电动钟表式仪表；振荡计；摆式仪表', '2006.01'),
-('G01R11/48', '分组', 1, '专用于测量有功分量或无功分量的仪表；专用于测量视在功率的仪表', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('G01R11/48', '分组', 1, '专用于测量有功分量或无功分量的仪表；专用于测量视在功率的仪表', '2006.01'),
 ('G01R11/50', '分组', 2, '用于测量有功分量的', '2006.01'),
 ('G01R11/52', '分组', 2, '用于测量无功分量的', '2006.01'),
 ('G01R11/54', '分组', 2, '同时测量有功分量、无功分量、视在功率这3种变量中的至少两个变量的', '2006.01'),
@@ -63130,15 +63199,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G02B21/16', '分组', 1, '用于紫外照明的', '2006.01'),
 ('G02B21/18', '分组', 1, '具有多光路的布置，例如，用于比较两个试样', '2006.01'),
 ('G02B21/20', '分组', 2, '双筒镜布置', '2006.01'),
-('G02B21/22', '分组', 3, '立体布置', '2006.01'),
+('G02B21/22', '分组', 3, '立体布置', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G02B21/24', '分组', 1, '底座结构', '2006.01'),
 ('G02B21/26', '分组', 2, '平台；其调节装置', '2006.01'),
 ('G02B21/28', '分组', 2, '具有冷却装置', '2006.01'),
 ('G02B21/30', '分组', 2, '具有加热装置', '2006.01'),
 ('G02B21/32', '分组', 1, '结构上与显微镜组合的微型控制器', '2006.01'),
-('G02B21/33', '分组', 1, '浸润油', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('G02B21/33', '分组', 1, '浸润油', '2006.01'),
 ('G02B21/34', '分组', 1, '显微镜载物片，例如，在载物片上安装试样', '2006.01'),
 ('G02B21/36', '分组', 1, '照相或投影用的布置（G02B21/18优先）', '2006.01'),
 ('G02B23/00', '主组', 0, '望远镜，例如，双筒望远镜；潜望镜；用于观察空心体内部的仪器；取景器；光学瞄准或观测设备', '2006.01'),
@@ -64132,15 +64202,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G03F5/12', '分组', 2, '应用其他网屏，例如，粒状网屏', '2006.01'),
 ('G03F5/14', '分组', 1, '用接触方法', '2006.01'),
 ('G03F5/16', '分组', 2, '应用灰色半色调网屏', '2006.01'),
-('G03F5/18', '分组', 2, '应用彩色半色调网屏', '2006.01'),
+('G03F5/18', '分组', 2, '应用彩色半色调网屏', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G03F5/20', '分组', 1, '网屏用于照相凹版印刷', '2006.01'),
 ('G03F5/22', '分组', 1, '几个网屏组合；龟纹的消除', '2006.01'),
 ('G03F5/24', '分组', 1, '用多次曝光；例如，照相和网屏的联合方法', '2006.01'),
 ('G03F7/00', '主组', 0, '图纹面，例如，印刷表面的照相制版如光刻工艺；图纹面照相制版用的材料，如：含光致抗蚀剂的材料；图纹面照相制版的专用设备（用于特殊工艺的光致抗蚀剂结构见相关的位置，例如，B44C，H10P，例如，H10P76/00，H05K）', '2006.01'),
 ('G03F7/004', '分组', 1, '感光材料（G03F7/12，G03F7/14优先）', '2006.01'),
-('G03F7/008', '分组', 2, '叠氮化合物（G03F7/075优先）', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('G03F7/008', '分组', 2, '叠氮化合物（G03F7/075优先）', '2006.01'),
 ('G03F7/012', '分组', 3, '高分子叠氮化合物；高分子添加剂，例如，黏结剂', '2006.01'),
 ('G03F7/016', '分组', 2, '重氮盐或化合物（G03F7/075优先）', '2006.01'),
 ('G03F7/021', '分组', 3, '高分子重氮化合物；高分子添加剂，例如，黏结剂', '2006.01'),
@@ -65134,15 +65205,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G05F1/607', '分组', 3, '利用与负载并联的放电管作为末级控制器的', '2006.01'),
 ('G05F1/61', '分组', 4, '包括至少有一级对输出电平是敏感的两个调整级', '2006.01'),
 ('G05F1/613', '分组', 3, '利用与负载并联的半导体器件作为末级控制器的', '2006.01'),
-('G05F1/614', '分组', 4, '包括了至少有一级对输出电平是敏感的两个调整级', '2006.01'),
+('G05F1/614', '分组', 4, '包括了至少有一级对输出电平是敏感的两个调整级', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G05F1/618', '分组', 3, '利用一些与负载串联和并联的半导体器件作为末级控制器的', '2006.01'),
 ('G05F1/62', '分组', 3, '利用抵消或提升的直流电源的', '2006.01'),
 ('G05F1/625', '分组', 2, '其中实际被调整的变量是交流或直流是没有关系的', '2006.01'),
 ('G05F1/63', '分组', 3, '利用与负载串联的可变阻抗作为末级控制器的', '2006.01'),
 ('G05F1/635', '分组', 4, '可变阻抗是霍尔效应器件、磁敏电阻或热敏电阻的', '2006.01'),
-('G05F1/644', '分组', 4, '可变阻抗是压敏电阻的', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('G05F1/644', '分组', 4, '可变阻抗是压敏电阻的', '2006.01'),
 ('G05F1/648', '分组', 4, '可变阻抗是要被选择的多个电阻器', '2006.01'),
 ('G05F1/652', '分组', 3, '利用与负载并联的可变阻抗作为末级控制器的', '2006.01'),
 ('G05F1/656', '分组', 3, '利用一些与负载串联和并联的可变阻抗作为末级控制器的', '2006.01'),
@@ -66136,15 +66208,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G06G7/18', '分组', 2, '用于积分或微分的（G06G7/19优先）', '2006.01'),
 ('G06G7/182', '分组', 3, '应用磁性元件的', '2006.01'),
 ('G06G7/184', '分组', 3, '应用电容性元件的', '2006.01'),
-('G06G7/186', '分组', 4, '应用在反馈环路中包含有电容器或电阻器的运算放大器的', '2006.01'),
+('G06G7/186', '分组', 4, '应用在反馈环路中包含有电容器或电阻器的运算放大器的', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G06G7/188', '分组', 3, '应用机电元件的', '2006.01'),
 ('G06G7/19', '分组', NULL, '用于形成乘积的积分的，例如：傅立叶积分、拉普拉斯积分或相关积分；使用正交函数作函数分析或函数合成', '2006.01'),
 ('G06G7/195', '分组', 3, '应用电声元件的', '2006.01'),
 ('G06G7/20', '分组', NULL, '用于计算幂、根、多项式、均方值或标准偏差的（G06G7/122、G06G7/28优先）', '2006.01'),
 ('G06G7/22', '分组', NULL, '用于计算三角函数、坐标变换、含有矢量值的计算的（应用联立方程的三角计算入G06G7/34）', '2006.01'),
-('G06G7/24', '分组', 2, '用于计算对数或指数函数的，例如，双曲函数', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('G06G7/24', '分组', 2, '用于计算对数或指数函数的，例如，双曲函数', '2006.01'),
 ('G06G7/25', '分组', 2, '用于不连续函数的，例如，间隙、死区、极限、绝对值或峰值', '2006.01'),
 ('G06G7/26', '分组', 2, '任意函数发生器（应用正交函数，例如：傅立叶级数入G06G7/19）', '2006.01'),
 ('G06G7/28', '分组', 3, '借助于分段逼近作函数合成的', '2006.01'),
@@ -67138,15 +67211,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G08B13/18', '分组', NULL, '靠干扰热、光或较短波长辐射作用的；靠热、光或较短波长辐射的入侵源作用的', '2006.01'),
 ('G08B13/181', '分组', 2, '用主动辐射检测系统的', '2006.01'),
 ('G08B13/183', '分组', 3, '靠切断辐射射束或辐射屏蔽', '2006.01'),
-('G08B13/184', '分组', 4, '用辐射反射器的', '2006.01'),
+('G08B13/184', '分组', 4, '用辐射反射器的', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G08B13/186', '分组', 4, '用光导的，例如光导纤维', '2006.01'),
 ('G08B13/187', '分组', 3, '靠干扰辐射场的', '2006.01'),
 ('G08B13/189', '分组', 2, '用被动辐射检测系统的', '2006.01'),
 ('G08B13/19', '分组', 3, '使用红外辐射探测系统', '2006.01'),
 ('G08B13/191', '分组', 4, '用热电敏感装置的', '2006.01'),
-('G08B13/193', '分组', 4, '用聚焦装置的', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('G08B13/193', '分组', 4, '用聚焦装置的', '2006.01'),
 ('G08B13/194', '分组', 3, '用图像扫描和比较系统的', '2006.01'),
 ('G08B13/196', '分组', 4, '用电视摄像机的', '2006.01'),
 ('G08B13/20', '分组', 1, '靠液体压力的变化作用的', '2006.01'),
@@ -68140,15 +68214,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G10L19/008', '分组', NULL, '多通道音频信号编码和解码，采用通道间的相关性以减少冗余度，例如联合立体声，强度编码或矩阵变换', '2013.01'),
 ('G10L19/012', '分组', 1, '舒适噪声，静音编码', '2013.01'),
 ('G10L19/018', '分组', 1, '音频水印，即在音频数据里埋入非音频数据', '2013.01'),
-('G10L19/02', '分组', 1, '利用频谱分析，例如变换声码器或子频带声码器', '2013.01'),
+('G10L19/02', '分组', 1, '利用频谱分析，例如变换声码器或子频带声码器', '2013.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G10L19/022', '分组', 2, '成组，即样本的及时分组；分析窗口的选择；重叠因子', '2013.01'),
 ('G10L19/025', '分组', 3, '用于时间/频率分辨率转换的瞬时或启动检测', '2013.01'),
 ('G10L19/028', '分组', NULL, '噪声置换，例如通过噪声源置换非音频频谱分量（用于非连续语音传输的舒适噪声入G10L19/012）', '2013.01'),
 ('G10L19/03', '分组', 2, '用于防止前回声的频谱预测；瞬时噪声整形〔TNS〕，例如在MPEG2或MPEG4中', '2013.01'),
 ('G10L19/032', '分组', 2, '频谱分量的量化或非量化', '2013.01'),
-('G10L19/035', '分组', 3, '标准量化', '2013.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('G10L19/035', '分组', 3, '标准量化', '2013.01'),
 ('G10L19/038', '分组', 3, '矢量量化，例如TwinVQ音频', '2013.01'),
 ('G10L19/04', '分组', 1, '利用预测技术', '2013.01'),
 ('G10L19/06', '分组', 2, '例如短期预测系数的频谱特征的确定或编码', '2013.01'),
@@ -69142,15 +69217,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G21C1/08', '分组', NULL, '慢化剂为高增压的，例如，沸水反应堆、总体超热反应堆、加压水反应堆（G21C1/22优先）', '2006.01'),
 ('G21C1/09', '分组', 4, '压力调节装置，也就是增压器', '2006.01'),
 ('G21C1/10', '分组', 4, '慢化剂和冷却剂是不同的或隔开的', '2006.01'),
-('G21C1/12', '分组', 5, '固体慢化剂，例如，镁诺克斯型（Magnox）反应堆', '2006.01'),
+('G21C1/12', '分组', 5, '固体慢化剂，例如，镁诺克斯型（Magnox）反应堆', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('G21C1/14', '分组', 3, '慢化剂基本上是不加压的，例如，游泳池式反应堆（G21C1/22优先）', '2006.01'),
 ('G21C1/16', '分组', 4, '慢化剂和冷却剂是不同的或隔开的，例如，钠—石墨反应堆', '2006.01'),
 ('G21C1/18', '分组', 5, '加压的冷却剂', '2006.01'),
 ('G21C1/20', '分组', 6, '慢化剂是液体，例如压力管反应堆', '2006.01'),
 ('G21C1/22', '分组', 3, '使用液体或气体燃料', '2006.01'),
-('G21C1/24', '分组', 2, '均匀的反应堆，即其中燃料和慢化剂对中子为有效的均匀介质', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('G21C1/24', '分组', 2, '均匀的反应堆，即其中燃料和慢化剂对中子为有效的均匀介质', '2006.01'),
 ('G21C1/26', '分组', 3, '单区反应堆', '2006.01'),
 ('G21C1/28', '分组', 3, '双区反应堆', '2006.01'),
 ('G21C1/30', '分组', 1, '亚临界反应堆', '2006.01'),
@@ -70144,15 +70220,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H01G9/028', '分组', 4, '有机半导体电解质，例如TCNQ', '2006.01'),
 ('H01G9/032', '分组', 4, '无机半导体电解质，例如MnO2', '2006.01'),
 ('H01G9/035', '分组', 3, '液体电解质，例如浸渍材料（H01G11/54优先）', '2006.01'),
-('H01G9/04', '分组', 2, '电极', '2006.01'),
+('H01G9/04', '分组', 2, '电极', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H01G9/042', '分组', 3, '以材料为特征的（H01G11/22优先）', '2006.01'),
 ('H01G9/045', '分组', 4, '以铝为基的', '2006.01'),
 ('H01G9/048', '分组', 3, '以其结构为特征的（H01G11/22优先）', '2006.01'),
 ('H01G9/052', '分组', 4, '烧结电极', '2006.01'),
 ('H01G9/055', '分组', 4, '腐蚀箔电极', '2006.01'),
-('H01G9/06', '分组', 3, '安装在容器中的电极', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('H01G9/06', '分组', 3, '安装在容器中的电极', '2006.01'),
 ('H01G9/07', '分组', 2, '电介质层', '2006.01'),
 ('H01G9/08', '分组', 2, '外壳；封装', '2006.01'),
 ('H01G9/10', '分组', 3, '焊接，例如引线焊接', '2006.01'),
@@ -71146,15 +71223,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H01J17/62', '分组', 3, '有由中间电极控制的独立放电通道的，如多相整流器', '2006.01'),
 ('H01J17/64', '分组', 1, '专用在波导中作转换或调制的电子管，如天线收发转换器', '2006.01'),
 ('H01J19/00', '主组', 0, 'H01J21/00组中包含的各种类型的真空管的零部件', '2006.01'),
-('H01J19/02', '分组', 1, '电子发射极；阴极', '2006.01'),
+('H01J19/02', '分组', 1, '电子发射极；阴极', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H01J19/04', '分组', 2, '热阴极', '2006.01'),
 ('H01J19/06', '分组', 3, '按材料特性区分的', '2006.01'),
 ('H01J19/062', '分组', 4, '带有碱土金属氧化物，或者与还原反应物一起使用的氧化物作为发射材料的', '2006.01'),
 ('H01J19/064', '分组', 4, '带有其他金属氧化物作为发射材料的', '2006.01'),
 ('H01J19/066', '分组', 4, '带有金属或合金作为发射材料的', '2006.01'),
-('H01J19/068', '分组', 4, '带有金属导电性质的化合物的，例如像硼化镧作为发射材料的', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('H01J19/068', '分组', 4, '带有金属导电性质的化合物的，例如像硼化镧作为发射材料的', '2006.01'),
 ('H01J19/08', '分组', 3, '由电流直接加热的阴极', '2006.01'),
 ('H01J19/10', '分组', 3, '按其形状区分的', '2006.01'),
 ('H01J19/12', '分组', 4, '支架；减振装置', '2006.01'),
@@ -72148,15 +72226,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H01M50/529', '分组', 3, '电池内通过隔板联接的，例如在电池箱内', '2021.01'),
 ('H01M50/531', '分组', 2, '电池箱内的电极联接', '2021.01'),
 ('H01M50/533', '分组', 3, '以导线或焊垫的形状为特征', '2021.01'),
-('H01M50/534', '分组', 3, '以导线或焊垫的材料为特征', '2021.01'),
+('H01M50/534', '分组', 3, '以导线或焊垫的材料为特征', '2021.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H01M50/536', '分组', 3, '固定导线至电极的方法，如焊接', '2021.01'),
 ('H01M50/538', '分组', 3, '缠绕或折叠电极堆叠结构的多个导线或焊垫连接', '2021.01'),
 ('H01M50/54', '分组', 3, '板状电极堆叠结构的多个导线或焊垫连接，如电极带或电极桥', '2021.01'),
 ('H01M50/541', '分组', 4, '用于铅酸蓄电池', '2021.01'),
 ('H01M50/543', '分组', 2, '端子', '2021.01'),
-('H01M50/545', '分组', 3, '由电池壳形成的（适用于具有弯曲横截面的电池的杯形端子入H01M50/56）', '2021.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('H01M50/545', '分组', 3, '由电池壳形成的（适用于具有弯曲横截面的电池的杯形端子入H01M50/56）', '2021.01'),
 ('H01M50/547', '分组', 3, '以电池上端子的配置为特征的', '2021.01'),
 ('H01M50/548', '分组', 4, '在电池两侧的', '2021.01'),
 ('H01M50/55', '分组', 4, '在电池同侧的', '2021.01'),
@@ -73150,15 +73229,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H01S3/121', '分组', 4, '应用腔内机械器件', '2006.01'),
 ('H01S3/123', '分组', 5, '使用旋转镜', '2006.01'),
 ('H01S3/125', '分组', 5, '使用旋转棱镜', '2006.01'),
-('H01S3/127', '分组', 4, '多个Q开关', '2006.01'),
+('H01S3/127', '分组', 4, '多个Q开关', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H01S3/13', '分组', 2, '激光器输出参数的稳定，例如频率、幅度', '2006.01'),
 ('H01S3/131', '分组', 3, '由控制激活手段，例如通过控制激励方法或设备', '2006.01'),
 ('H01S3/134', '分组', 4, '在气体激光器中', '2006.01'),
 ('H01S3/136', '分组', 3, '通过控制放置在腔体内的器件', '2006.01'),
 ('H01S3/137', '分组', 4, '用于稳定频率的', '2006.01'),
-('H01S3/139', '分组', 3, '由控制腔的反射器的相互位置或反射器的反射性能', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('H01S3/139', '分组', 3, '由控制腔的反射器的相互位置或反射器的反射性能', '2006.01'),
 ('H01S3/14', '分组', 1, '按所用激活介质的材料区分的', '2006.01'),
 ('H01S3/16', '分组', 2, '固体材料', '2006.01'),
 ('H01S3/17', '分组', 3, '非晶体的，例如玻璃', '2006.01'),
@@ -74152,15 +74232,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H02K5/08', '分组', 2, '绝缘外壳', '2006.01'),
 ('H02K5/10', '分组', 2, '带有防护外来物侵入的装置的，例如防止水、手指的侵入的', '2006.01'),
 ('H02K5/12', '分组', 2, '专用于液体或气体中工作的（带有冷却装置的入H02K9/00）', '2006.01'),
-('H02K5/124', '分组', 3, '轴的密封', '2006.01'),
+('H02K5/124', '分组', 3, '轴的密封', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H02K5/128', '分组', 3, '使用气隙套或气隙圆环的', '2006.01'),
 ('H02K5/132', '分组', 3, '潜水电动机（H02K 5/128优先）', '2006.01'),
 ('H02K5/136', '分组', 3, '防爆的', '2006.01'),
 ('H02K5/14', '分组', 2, '支承或保护电刷或刷握的装置', '2006.01'),
 ('H02K5/15', '分组', 2, '用于轴承护罩或端盘的安装设备', '2006.01'),
-('H02K5/16', '分组', 2, '轴承支承装置，例如绝缘支承，把轴承装入轴承护罩内的装置（磁性轴承入H02K 7/09）', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('H02K5/16', '分组', 2, '轴承支承装置，例如绝缘支承，把轴承装入轴承护罩内的装置（磁性轴承入H02K 7/09）', '2006.01'),
 ('H02K5/167', '分组', 3, '用滑动接触或球帽轴承的', '2006.01'),
 ('H02K5/173', '分组', 3, '用滚动接触轴承的，例如滚珠轴承', '2006.01'),
 ('H02K5/18', '分组', 2, '带有改善热传导的肋或散热片的', '2006.01'),
@@ -75154,15 +75235,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H03H11/30', '分组', 3, '源阻抗对负荷阻抗的自动匹配', '2006.01'),
 ('H03H11/32', '分组', 2, '用于将平衡信号转换为不平衡信号的网络，反之亦然，例如巴伦', '2006.01'),
 ('H03H11/34', '分组', 2, '把在不同频率或频带上工作的几个源或负荷连接到一个公共负荷或源的网络', '2006.01'),
-('H03H11/36', '分组', 2, '把在同一频率或频带上工作的几个源或负荷连接到一个公共负荷或源的网络（提供两个或两个以上输出信号的移相器入H03H11/22）', '2006.01'),
+('H03H11/36', '分组', 2, '把在同一频率或频带上工作的几个源或负荷连接到一个公共负荷或源的网络（提供两个或两个以上输出信号的移相器入H03H11/22）', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H03H11/38', '分组', 2, '单向传输网络，即单线路', '2006.01'),
 ('H03H11/40', '分组', 2, '阻抗变换器', '2006.01'),
 ('H03H11/42', '分组', 3, '回转器（用于选频网络的入H03H11/08）', '2006.01'),
 ('H03H11/44', '分组', 3, '负阻抗变换器', '2006.01'),
 ('H03H11/46', '分组', 1, '单端对网络', '2006.01'),
-('H03H11/48', '分组', 2, '模拟电抗的', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('H03H11/48', '分组', 2, '模拟电抗的', '2006.01'),
 ('H03H11/50', '分组', 3, '使用回转器', '2006.01'),
 ('H03H11/52', '分组', 2, '模拟负阻的', '2006.01'),
 ('H03H11/54', '分组', 1, '为减少温度变化的影响对网络的改进', '2006.01'),
@@ -76156,15 +76238,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H04B7/155', '分组', 3, '地面站（H04B7/204优先）', '2006.01'),
 ('H04B7/165', '分组', 4, '用调角的', '2006.01'),
 ('H04B7/17', '分组', 4, '用脉冲调制的，例如脉冲编码调制', '2006.01'),
-('H04B7/185', '分组', 3, '空间站或机载站（H04B7/204优先）', '2006.01'),
+('H04B7/185', '分组', 3, '空间站或机载站（H04B7/204优先）', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H04B7/19', '分组', 4, '地球同步站', '2006.01'),
 ('H04B7/195', '分组', 4, '非同步站', '2006.01'),
 ('H04B7/204', '分组', 3, '多址联接', '2006.01'),
 ('H04B7/208', '分组', 4, '频分多址联接', '2006.01'),
 ('H04B7/212', '分组', 4, '时分多址联接', '2006.01'),
-('H04B7/216', '分组', 4, '码分或扩频多址联接', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('H04B7/216', '分组', 4, '码分或扩频多址联接', '2006.01'),
 ('H04B7/22', '分组', 1, '散射传播系统', '2006.01'),
 ('H04B7/24', '分组', 1, '用于两个或两个以上站之间的通信（无线通信网络入H04W）', '2006.01'),
 ('H04B7/26', '分组', 2, '至少其中之一是移动的', '2006.01'),
@@ -77158,15 +77241,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H04M1/2745', '分组', 4, '使用静态电子存储器，例如芯片', '2020.01'),
 ('H04M1/27453', '分组', 5, '电话号码目录允许存储附加订户数据，例如元数据', '2020.01'),
 ('H04M1/27457', '分组', 6, '管理，例如数据的手动编辑', '2020.01'),
-('H04M1/2746', '分组', 6, '排序，例如根据使用历史或使用频率', '2020.01'),
+('H04M1/2746', '分组', 6, '排序，例如根据使用历史或使用频率', '2020.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H04M1/27467', '分组', 5, '数据检索方法', '2020.01'),
 ('H04M1/2747', '分组', 6, '屏幕滚动', '2020.01'),
 ('H04M1/27475', '分组', 6, '利用交互式图形方法或图像表示', '2020.01'),
 ('H04M1/2748', '分组', 6, '通过匹配字符串', '2020.01'),
 ('H04M1/27485', '分组', 5, '附加前缀或插入一个休止符到拨号序列', '2020.01'),
-('H04M1/2749', '分组', 5, '自动呼叫产生和重发系统，如电话摘机或占线重拨时', '2020.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('H04M1/2749', '分组', 5, '自动呼叫产生和重发系统，如电话摘机或占线重拨时', '2020.01'),
 ('H04M1/27495', '分组', 5, '用分立电子元件实现的，即，既不可编程，又不受微处理器控制（H04M1/27457-H04M1/2749 优先）', NULL),
 ('H04M1/275', '分组', 5, '利用便携电子号码簿实现的', '2006.01'),
 ('H04M1/2753', '分组', 5, '提供数据内容', '2020.01'),
@@ -78160,15 +78244,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H04N7/24', '分组', 1, '利用脉冲编码调制传输电视信号的系统（H04N21/00优先）', '2011.01'),
 ('H04N7/52', '分组', 2, '传输与一个或多个其他脉冲编码调制信号的脉冲编码调制系统，例如：音频信号、同步信号（复用流的集合，通过把其他内容或者附加数据与视频流结合起来，复用流的再复用，填充比特插入复用流，在服务器端的初级分组流的集合入H04N21/236；复用流的分解，复用流的再复用，服务信息的提取或处理，在客户端最小单元数据流的分解入H04N21/434）', '2011.01'),
 ('H04N7/54', '分组', 3, '属同步的信号', '2006.01'),
-('H04N7/56', '分组', 4, '由此形成的同步系统', '2006.01'),
+('H04N7/56', '分组', 4, '由此形成的同步系统', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H04N9/00', '主组', 0, '彩色电视系统的零部件', '2006.01'),
 ('H04N9/01', '分组', 1, '用于解调由彩色条纹滤波器通过相位分离进行空间调制的颜色分量信号的电路', '2023.01'),
 ('H04N9/03', '分组', 1, '用于解调由彩色条纹滤波器通过频率分离进行空间调制的颜色分量信号的电路', '2023.01'),
 ('H04N9/11', '分组', 1, '彩色影片的扫描，例如用于电视电影', '2006.01'),
 ('H04N9/12', '分组', 1, '图像重现器（H04N9/11优先）', '2006.01'),
-('H04N9/14', '分组', 2, '只应用光学—机械扫描装置的', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('H04N9/14', '分组', 2, '只应用光学—机械扫描装置的', '2006.01'),
 ('H04N9/16', '分组', 2, '利用阴极射线管（H04N9/11优先）', '2006.01'),
 ('H04N9/18', '分组', 3, '对各基色信号应用单独电子束的（H04N9/27优先）', '2006.01'),
 ('H04N9/20', '分组', 4, '在一个阴极射线管中带有多于一个电子束的', '2006.01'),
@@ -79162,15 +79247,16 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H05H1/36', '分组', 5, '电路装置（H05H1/38，H05H1/40优先）', '2006.01'),
 ('H05H1/38', '分组', 5, '电极的导向或对中', '2006.01'),
 ('H05H1/40', '分组', 5, '应用外加磁场的，例如用于聚焦电弧或旋转电弧的', '2006.01'),
-('H05H1/42', '分组', 4, '带有向等离子体中引入材料的，例如粉末、液体', '2006.01'),
+('H05H1/42', '分组', 4, '带有向等离子体中引入材料的，例如粉末、液体', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";
+
+INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H05H1/44', '分组', 4, '应用多于一个喷管的', '2006.01'),
 ('H05H1/46', '分组', 2, '应用外加电磁场的，例如高频能或微波能（H05H1/26优先）', '2006.01'),
 ('H05H1/48', '分组', 2, '应用电弧的（H05H1/26优先）', '2006.01'),
 ('H05H1/50', '分组', 3, '并应用外加磁场的，例如用于聚焦电弧或旋转电弧的', '2006.01'),
 ('H05H1/52', '分组', 2, '应用导火线或火花隙的（H05H1/26优先）', '2006.01'),
-('H05H1/54', '分组', 1, '等离子体加速器', '2006.01');
-
-INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
+('H05H1/54', '分组', 1, '等离子体加速器', '2006.01'),
 ('H05H11/00', '主组', 0, '磁感应加速器，例如电子磁感应加速器', '2006.01'),
 ('H05H11/02', '分组', 1, '空心型电子磁感应加速器', '2006.01'),
 ('H05H11/04', '分组', 1, '附加励磁型电子磁感应加速器', '2006.01'),
@@ -80142,4 +80228,5 @@ INSERT INTO patent_ipc ("code", "type", "level", "name", "version") VALUES
 ('H10W99/00', '主组', 0, '本小类其他组不包括的技术主题', '2026.01'),
 ('H99', '大类', NULL, '本部中其他类目不包括的技术主题', '2006.01'),
 ('H99Z', '小类', NULL, '本部其他类目不包括的技术主题〔8〕', '2006.01'),
-('H99Z99/00', '主组', 0, '本部其他类目不包括的技术主题', '2006.01');
+('H99Z99/00', '主组', 0, '本部其他类目不包括的技术主题', '2006.01')
+ON CONFLICT ("code") DO UPDATE SET "type" = EXCLUDED."type", "level" = EXCLUDED."level", "name" = EXCLUDED."name", "version" = EXCLUDED."version";

@@ -1,5 +1,6 @@
 -- Generated from data/ — do not edit by hand.
 -- Regenerate with: npm run generate:sql
+-- Safe to re-run: rows are upserted by primary key; rows absent from this seed are not deleted.
 -- IPC to SEI mapping: (ipc_code, sei_id) composite PK
 
 -- Requires patent_ipc.sql and patent_sei.sql to be loaded first (FK dependencies).
@@ -1010,7 +1011,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('A01K9/00', 202),
 ('A01K91/00', 202),
 ('A01K91/02', 202),
-('A01K91/03', 202);
+('A01K91/03', 202)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('A01K91/04', 202),
@@ -2012,7 +2014,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('A61F5/05', 193),
 ('A61F5/052', 193),
 ('A61F5/055', 193),
-('A61F5/058', 193);
+('A61F5/058', 193)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('A61F5/08', 193),
@@ -3014,7 +3017,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('A61L17/06', 193),
 ('A61L17/08', 193),
 ('A61L17/10', 193),
-('A61L17/12', 193);
+('A61L17/12', 193)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('A61L17/14', 193),
@@ -4016,7 +4020,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('B01D47/18', 275),
 ('B01D49/00', 276),
 ('B01D49/02', 276),
-('B01D50/00', 277);
+('B01D50/00', 277)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('B01D50/10', 277),
@@ -5018,7 +5023,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('B22C15/10', 36),
 ('B22C15/12', 36),
 ('B22C15/14', 36),
-('B22C15/16', 36);
+('B22C15/16', 36)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('B22C15/18', 36),
@@ -6020,7 +6026,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('B23K101/22', 101),
 ('B23K101/24', 101),
 ('B23K101/26', 101),
-('B23K101/28', 101);
+('B23K101/28', 101)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('B23K101/30', 101),
@@ -7022,7 +7029,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('B41J1/50', 2),
 ('B41J1/52', 2),
 ('B41J1/54', 2),
-('B41J1/56', 2);
+('B41J1/56', 2)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('B41J1/58', 2),
@@ -8024,7 +8032,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('B60T13/50', 219),
 ('B60T13/52', 219),
 ('B60T13/56', 219),
-('B60T13/563', 219);
+('B60T13/563', 219)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('B60T13/565', 219),
@@ -9026,7 +9035,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('B63G8/33', 67),
 ('B63G8/34', 67),
 ('B63G8/36', 67),
-('B63G8/38', 67);
+('B63G8/38', 67)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('B63G8/39', 67),
@@ -10028,7 +10038,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('B65G65/18', 45),
 ('B65G65/20', 45),
 ('B65G65/22', 45),
-('B65G65/23', 45);
+('B65G65/23', 45)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('B65G65/24', 45),
@@ -11030,7 +11041,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C02F11/122', 280),
 ('C02F11/123', 280),
 ('C02F11/125', 280),
-('C02F11/126', 280);
+('C02F11/126', 280)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C02F11/127', 280),
@@ -12032,7 +12044,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C07C13/38', 191),
 ('C07C13/39', 191),
 ('C07C13/40', 191),
-('C07C13/42', 191);
+('C07C13/42', 191)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C07C13/43', 191),
@@ -13034,7 +13047,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C07C317/40', 191),
 ('C07C317/42', 191),
 ('C07C317/44', 191),
-('C07C317/46', 191);
+('C07C317/46', 191)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C07C317/48', 191),
@@ -14036,7 +14050,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C07C65/17', 191),
 ('C07C65/19', 191),
 ('C07C65/21', 191),
-('C07C65/24', 191);
+('C07C65/24', 191)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C07C65/26', 191),
@@ -15038,7 +15053,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C07D471/08', 191),
 ('C07D471/10', 191),
 ('C07D471/12', 191),
-('C07D471/14', 191);
+('C07D471/14', 191)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C07D471/16', 191),
@@ -16040,7 +16056,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C08F218/02', 159),
 ('C08F218/04', 159),
 ('C08F218/06', 159),
-('C08F218/08', 159);
+('C08F218/08', 159)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C08F218/10', 159),
@@ -17042,7 +17059,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C08K5/05', 160),
 ('C08K5/053', 160),
 ('C08K5/057', 160),
-('C08K5/06', 160);
+('C08K5/06', 160)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C08K5/07', 160),
@@ -18044,7 +18062,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C09B67/10', 140),
 ('C09B67/14', 140),
 ('C09B67/16', 140),
-('C09B67/18', 140);
+('C09B67/18', 140)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C09B67/20', 140),
@@ -19046,7 +19065,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C10M119/02', 182),
 ('C10M119/04', 182),
 ('C10M119/06', 182),
-('C10M119/08', 182);
+('C10M119/08', 182)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C10M119/10', 182),
@@ -20048,7 +20068,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C23C16/28', 161),
 ('C23C16/30', 161),
 ('C23C16/32', 161),
-('C23C16/34', 161);
+('C23C16/34', 161)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('C23C16/36', 161),
@@ -21050,7 +21071,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('E04B9/30', 259),
 ('E04B9/32', 259),
 ('E04B9/34', 259),
-('E04B9/36', 259);
+('E04B9/36', 259)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('E04C', 166),
@@ -22052,7 +22074,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('F04B27/12', 257),
 ('F04B27/14', 257),
 ('F04B27/16', 257),
-('F04B27/18', 257);
+('F04B27/18', 257)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('F04B27/20', 257),
@@ -23054,7 +23077,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('F21V17/18', 257),
 ('F21V17/20', 257),
 ('F21V19/00', 257),
-('F21V19/02', 257);
+('F21V19/02', 257)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('F21V19/04', 257),
@@ -24056,7 +24080,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('G01N15/1409', 187),
 ('G01N15/1429', 187),
 ('G01N15/1433', 187),
-('G01N15/1434', 187);
+('G01N15/1434', 187)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('G01N15/149', 187),
@@ -25058,7 +25083,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('G02F1/061', 9),
 ('G02F1/065', 9),
 ('G02F1/07', 9),
-('G02F1/09', 9);
+('G02F1/09', 9)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('G02F1/095', 9),
@@ -26060,7 +26086,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('G06F16/955', 2),
 ('G06F16/957', 2),
 ('G06F16/958', 2),
-('G06F17/00', 22);
+('G06F17/00', 22)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('G06F17/10', 21),
@@ -27062,7 +27089,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('G08C19/06', 3),
 ('G08C19/08', 3),
 ('G08C19/10', 3),
-('G08C19/12', 3);
+('G08C19/12', 3)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('G08C19/14', 3),
@@ -28064,7 +28092,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('G21D5/12', 231),
 ('G21D5/14', 231),
 ('G21D5/16', 231),
-('G21F9/00', 289);
+('G21F9/00', 289)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('G21F9/02', 289),
@@ -29066,7 +29095,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('H01M10/6552', 221),
 ('H01M10/6553', 221),
 ('H01M10/6554', 221),
-('H01M10/6555', 221);
+('H01M10/6555', 221)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('H01M10/6556', 221),
@@ -30068,7 +30098,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('H01S5/0225', 11),
 ('H01S5/02251', 11),
 ('H01S5/02253', 11),
-('H01S5/02255', 11);
+('H01S5/02255', 11)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('H01S5/02257', 11),
@@ -31070,7 +31101,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('H02P21/24', 253),
 ('H02P21/26', 253),
 ('H02P21/28', 253),
-('H02P21/30', 253);
+('H02P21/30', 253)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('H02P21/32', 253),
@@ -32072,7 +32104,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('H03K4/08', 13),
 ('H03K4/10', 13),
 ('H03K4/12', 13),
-('H03K4/14', 13);
+('H03K4/14', 13)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('H03K4/16', 13),
@@ -33074,7 +33107,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('H04M1/72406', 6),
 ('H04M1/72409', 6),
 ('H04M1/72412', 6),
-('H04M1/72415', 6);
+('H04M1/72415', 6)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('H04M1/72418', 6),
@@ -34076,7 +34110,8 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('H04N9/877', 6),
 ('H04N9/88', 6),
 ('H04N9/882', 6),
-('H04N9/885', 6);
+('H04N9/885', 6)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('H04N9/888', 6),
@@ -34676,4 +34711,5 @@ INSERT INTO patent_ipc_sei ("ipc_code", "sei_id") VALUES
 ('H05K7/16', 184),
 ('H05K7/18', 184),
 ('H05K7/20', 184),
-('H05K9/00', 256);
+('H05K9/00', 256)
+ON CONFLICT DO NOTHING;

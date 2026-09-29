@@ -1,5 +1,6 @@
 -- Generated from data/ — do not edit by hand.
 -- Regenerate with: npm run generate:sql
+-- Safe to re-run: rows are upserted by primary key; rows absent from this seed are not deleted.
 -- SEI classification rules: id PK, sei_code, sei_name, keywords (nullable)
 
 CREATE TABLE IF NOT EXISTS patent_sei (
@@ -331,4 +332,5 @@ INSERT INTO patent_sei ("id", "sei_code", "sei_name", "keywords") VALUES
 (318, '9.1', '新技术与创新创业服务', '农业技术推广服务；三维（3D)打印技术推广服务。'),
 (319, '9.1', '新技术与创新创业服务', '创业指导服务；创业空间服务。'),
 (320, '9.2', '其他相关服务', '现代航空物流；通用航空生产服务；空中交通管理；其他航空运输辅助活动。'),
-(321, '9.2', '其他相关服务', '互联网消费金融、保理服务；公开募集证券投资基金等金融服务。');
+(321, '9.2', '其他相关服务', '互联网消费金融、保理服务；公开募集证券投资基金等金融服务。')
+ON CONFLICT ("id") DO UPDATE SET "sei_code" = EXCLUDED."sei_code", "sei_name" = EXCLUDED."sei_name", "keywords" = EXCLUDED."keywords";

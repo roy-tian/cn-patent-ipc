@@ -1,7 +1,7 @@
 {
   "name": "cn-patent-ipc",
-  "version": "0.1.2",
-  "description": "Chinese-edition IPC patent classification — 79,972 entries (section/class/subclass/group) with titles and effective editions, plus the CNIPA strategic-emerging-industry (SEI) mapping. Zero runtime dependencies. 中文版专利国际专利分类(IPC)数据:约 8 万条分类号(含名称与生效版次),附战略性新兴产业(SEI)参照映射。",
+  "version": "0.1.3",
+  "description": "Chinese-edition IPC patent classification — 79,978 entries (section/class/subclass/group) with titles and effective editions, plus the CNIPA strategic-emerging-industry (SEI) mapping. Zero runtime dependencies. 中文版专利国际专利分类(IPC)数据:约 8 万条分类号(含名称与生效版次),附战略性新兴产业(SEI)参照映射。",
   "keywords": [
     "patent",
     "ipc",
@@ -25,16 +25,33 @@
   },
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "sei": [
+        "./dist/sei.d.ts"
+      ]
+    }
+  },
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./sei": {
-      "types": "./dist/sei.d.ts",
-      "import": "./dist/sei.js",
-      "require": "./dist/sei.cjs"
+      "import": {
+        "types": "./dist/sei.d.ts",
+        "default": "./dist/sei.js"
+      },
+      "require": {
+        "types": "./dist/sei.d.cts",
+        "default": "./dist/sei.cjs"
+      }
     },
     "./data/*": "./data/*",
     "./sql/*": "./sql/*",
@@ -45,8 +62,10 @@
     "data",
     "sql",
     "README.md",
-    "README_zh.md",
+    "README_en.md",
     "NOTICE.md",
+    "NOTICE_en.md",
+    "CHANGELOG.md",
     "LICENSE"
   ],
   "sideEffects": false,
@@ -54,7 +73,7 @@
     "build": "tsup",
     "check": "tsc --noEmit",
     "test": "node --test tests/*.test.ts",
-    "import:seed": "node scripts/import-seed.ts",
+    "smoke": "node scripts/smoke.mjs",
     "generate:sql": "node scripts/generate-sql.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
