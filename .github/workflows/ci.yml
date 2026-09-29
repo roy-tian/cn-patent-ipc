@@ -23,7 +23,25 @@ jobs:
       - run: npm test
       - run: npm run build
       - name: Smoke-test both entrypoints
-        run: |
-          node -e "const m = require('./dist/index.cjs'); if (!m.lookup('A01B')) { process.exit(1) } console.log('cjs ok')"
-          node -e "const s = require('./dist/sei.cjs'); if (s.allSeiRules().length === 0) { process.exit(1) } console.log('sei cjs ok')"
-          node -e "Promise.all([import('./dist/index.js'), import('./dist/sei.js')]).then(([m, s]) => { if (!m.lookup('A01B') || s.allSeiRules().length === 0) { process.exit(1) } console.log('esm ok') })"
+        run: npm run smoke
+
+  # engines 声明 Node >= 18,但测试依赖类型剥离,只能在 24 上跑。这里用 24 构建,
+  # 再切到更低的版本加载 dist,确认产物在声明的范围内确实可用。
+  smoke:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: node scripts/smoke.mjs
