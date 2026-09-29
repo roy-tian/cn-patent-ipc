@@ -1,76 +1,59 @@
-# Data provenance and normalization — 数据出处与规范化说明
+# 数据来源与说明
 
-## What this data is
+[English](NOTICE_en.md)
 
-Three related datasets, distributed as JSONL plus generated PostgreSQL seeds:
+## 数据内容
 
-| File                 | Rows   | Content                                                                                                                                                                     |
-| -------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data/ipc.jsonl`     | 79,972 | Chinese-edition IPC classification entries: 8 部 (sections A–H), 132 大类, 655 小类, 7,667 主组, 71,510 分组, each with its Chinese title and the edition it took effect in |
-| `data/sei.jsonl`     | 321    | 战略性新兴产业 (Strategic Emerging Industries, SEI) classification rules — 40 industry codes, each with one or more keyword rules                                           |
-| `data/ipc-sei.jsonl` | 34,598 | IPC ↔ SEI mapping (which IPC codes belong to which SEI industry)                                                                                                            |
+| 文件                 | 内容                                                             |
+| -------------------- | ---------------------------------------------------------------- |
+| `data/ipc.jsonl`     | 中文版 IPC 条目(部、大类、小类、主组、分组),含中文标题与生效版次 |
+| `data/sei.jsonl`     | 战略性新兴产业(SEI)分类规则,每个产业代码对应一条或多条关键词规则 |
+| `data/ipc-sei.jsonl` | IPC ↔ SEI 映射                                                   |
 
-`version` values span **1985.01 through 2026.01**: each entry is tagged with the
-IPC edition in which it took effect (or was last amended). `DATA_VERSION` is
-exported as the newest edition present, currently `2026.01`.
+`version` 是条目生效或最近修订时的 IPC 版次,范围为 1985.01 至 2026.01。导出的
+`DATA_VERSION` 是其中最新的版次。
 
-## Sources
+## 来源
 
-- IPC classification (Chinese titles): 国家知识产权局 (CNIPA) published
-  国际专利分类表 (Chinese edition of WIPO's International Patent
-  Classification). The underlying classification scheme is published by WIPO
-  under CC BY 4.0; the Chinese edition is CNIPA's official publication.
-- SEI classification and IPC↔SEI mapping: 国家知识产权局《战略性新兴产业分类与
-  国际专利分类参照关系表》, an official public reference document.
+- IPC 中文标题:国家知识产权局(CNIPA)发布的《国际专利分类表》中文版。IPC 体系
+  由 WIPO 以 CC BY 4.0 发布。
+- SEI 规则与映射:国家知识产权局《战略性新兴产业分类与国际专利分类参照关系表》。
 
-The datasets in this repository were derived from a downstream project's seed
-dumps of those publications. As of v0.1.2, **Chinese titles were rebuilt from
-the official CNIPA 2026.01 PDFs** (all 8 sections): the original seed dump
-had systematically misaligned titles in ~12% of entries (adjacent-entry
-carry-over, notes and subclass indices merged into titles, truncations).
-`level` and `version` fields are still taken from the original seed; only
-`name` was rebuilt and verified entry-by-entry against the PDFs.
+数据最初取自某下游项目对上述出版物的种子转储,此后修正过两次:
 
-## Known data quirks (carried verbatim)
+- v0.1.2:按 CNIPA 2026.01 版 PDF(全部 8 个部)重建中文标题。原转储约 12%
+  的标题错位:串入相邻条目、并入附注或小类索引、被截断。`level` 与 `version`
+  仍沿用原转储。
+- v0.1.3:按 E 部 PDF 第 11 页重建 `E01D101/00` 引得码组。PDF 把这组分类号折成
+  两行,原转储截掉了末位,把 11 条并成了 5 条。
 
-- **2 entries have empty titles**: `C12P19/64`, `H02K21/24`. Both are printed
-  without a title in the official CNIPA 2026.01 PDF and are kept as-is.
-  (Six further empty-title entries from the original dump were repaired
-  during the 2026.01 title rebuild.)
-- **The `H01L` subtree is absent.** IPC deleted the subclass 半导体器件 in
-  the 2020.01 revision and redistributed its content into the new `H10*`
-  class (847 entries: H10B, H10D, H10F, …). This is confirmed against both
-  the CNIPA 2026.01 H-section table and WIPO's IPC-2026.01 master files
-  (EN/FR), which contain no `H01L` symbol. Queries for `H01L` return
-  nothing.
-- 257 entries carry a `NULL` version tag.
-- The mapping table matches **exact** IPC codes; hierarchical expansion (a
-  subclass mapping covering all its groups) is left to the consumer.
-- Titles were extracted from PDF text; a small number may retain minor
-  layout artifacts (e.g. an unclosed parenthesis where the PDF itself drops
-  a line, or a stray edition marker). `C07C409/02` and siblings genuinely
-  begin with `-O-O-` (peroxide linkage), which is not an artifact.
+## 已知瑕疵(按原样保留)
 
-## What is NOT included
+- 2 条标题为空:`C12P19/64`、`H02K21/24`,官方 PDF 中即无标题。
+- 没有 `H01L` 小类。IPC 分三个版次把它的内容移入新设的 `H10` 大类:2023.01 版
+  设 H10B、H10K、H10N,2025.01 版设 H10D、H10F、H10H,2026.01 版设 H10P、H10W,
+  2026.01 版中已无 H01L。已对照 CNIPA 2026.01 版 H 部与 WIPO IPC 2026.01 主文件
+  确认。官方 PDF 中 `G09G` 的标题仍有指向 H01L 的交叉引用,按原文保留。
+- 257 条的 `version` 为 `NULL`;1,688 个分组的 `level` 为 `NULL`,原转储即缺失。
+  部、大类、小类的 `level` 按设计为 `NULL`。
+- 映射只做精确匹配,小类的映射不覆盖其下各组。
+- 标题取自 PDF 文本,少数可能残留排版痕迹,例如 PDF 断行造成的括号未闭合,或多出
+  的版次标记。`C07C409/02` 等以 `-O-O-`(过氧键)开头,属正常内容。
 
-Retired legacy codes that existed only in a downstream application's database
-(8 withdrawn subgroup codes used by pre-2020 filings) are **not** part of this
-dataset. If you need them, add them locally.
+## 未收录
 
-## Regenerating artifacts
+2020 年前的申请曾使用、仅存在于某下游应用数据库中的 8 个已撤销分组。如有需要请
+自行添加。
 
-- `sql/postgresql/*.sql` files are generated from the JSONL
-  (`npm run generate:sql`). Never edit them by hand. Tables: `patent_ipc`,
-  `patent_sei`, `patent_ipc_sei`.
-- Re-importing from upstream SQL dumps: `npm run import:seed -- --ipc=<file>
---sei=<file> --mapping=<file>`. The import validates uniqueness and mapping
-  foreign keys, and fails loudly on inconsistent input.
+## 维护
 
-## License
+- `data/*.jsonl` 是唯一数据源。修订和新版次直接改 JSONL,并对照 CNIPA 官方出版物
+  核实。一次性的种子导入脚本已移除,因为重跑会撤销 v0.1.2 的标题重建;该次重建
+  所用的 PDF 对齐脚本也不在仓库中。
+- `sql/postgresql/*.sql` 由 `npm run generate:sql` 生成,不要手改。
 
-Code: MIT (see [LICENSE](LICENSE)).
-Data: the IPC scheme itself is WIPO's, published under CC BY 4.0; CNIPA's
-Chinese edition and the SEI reference table are official government
-publications. This compilation is distributed under MIT. No warranty is given
-as to fitness for any particular use — verify against official publications
-for legal purposes.
+## 许可
+
+代码与本数据汇编以 MIT 许可发布,见 [LICENSE](LICENSE)。IPC 体系归 WIPO 所有,
+以 CC BY 4.0 发布;CNIPA 的中文版与 SEI 参照关系表为政府官方出版物。本数据不作
+任何适用性担保,用于法律事务时请以官方出版物为准。

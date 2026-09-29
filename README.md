@@ -1,28 +1,28 @@
 # cn-patent-ipc
 
-Chinese-edition IPC patent classification as a zero-dependency dataset —
-**79,972 entries** (sections, classes, subclasses, groups) with Chinese titles
-and effective editions (1985.01 → 2026.01), plus the CNIPA
-strategic-emerging-industry (**SEI**) mapping, and a typed lookup API with
-ready-to-run PostgreSQL seeds.
+[![npm](https://img.shields.io/npm/v/cn-patent-ipc)](https://www.npmjs.com/package/cn-patent-ipc)
+![node](https://img.shields.io/node/v/cn-patent-ipc)
+![dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
+![module](https://img.shields.io/badge/module-ESM%20%7C%20CJS-blue)
+![types](https://img.shields.io/npm/types/cn-patent-ipc)
+[![license](https://img.shields.io/npm/l/cn-patent-ipc)](LICENSE)
 
-中文版专利国际专利分类(IPC)数据包:约 8 万条分类号(部/大类/小类/主组/分组),
-含中文标题与生效版次,附战略性新兴产业(SEI)参照映射,零运行时依赖。
-[中文说明](README_zh.md)
+中文版国际专利分类(IPC)数据包:含中文标题与生效版次(1985.01 → 2026.01),附
+国家知识产权局战略性新兴产业(SEI)参照映射,提供 TypeScript 查询 API 与
+PostgreSQL 种子 SQL。[English](README_en.md)
 
-- IPC: 8 部 · 132 大类 · 655 小类 · 7,667 主组 · 71,510 分组
-- SEI: 321 rules over 40 industry codes; 34,598 IPC↔SEI mappings
-- Companion package:
-  [`cn-divisions`](https://www.npmjs.com/package/cn-divisions) — China
-  administrative divisions with pinyin
+- IPC:79,978 条,即 8 部 · 132 大类 · 655 小类 · 7,668 主组 · 71,515 分组
+- SEI:40 个产业代码、321 条规则、34,598 条 IPC↔SEI 映射
+- 姊妹包:[`cn-divisions`](https://www.npmjs.com/package/cn-divisions),中国
+  行政区划数据(含拼音)
 
-## Install
+## 安装
 
 ```bash
 npm install cn-patent-ipc
 ```
 
-Node.js ≥ 18. ESM and CJS are both supported.
+版本变更与升级步骤见 [CHANGELOG.md](CHANGELOG.md)(英文)。
 
 ## IPC API
 
@@ -37,61 +37,45 @@ import {
 } from "cn-patent-ipc";
 
 lookup("A01B1/24");
-// { code: "A01B1/24", type: "分组", level: 2, name: "…", version: "2006.01" }
+// { code: "A01B1/24", type: "分组", level: 1, name: "处理草地或草坪用的犁", version: "2006.01" }
 
-ancestors("A01B1/24").map((e) => e.code);
-// [ "A", "A01", "A01B", "A01B1/00" ]  — structural chain down to the main group
-
-searchByName("半导体", { type: "小类" }); // includes H10D
-byVersion("2026.01"); // entries effective in the 2026.01 edition
-countByType(); // { 部: 8, 大类: 132, 小类: 655, 主组: 7667, 分组: 71510 }
+ancestors("A01B1/24").map((e) => e.code); // ["A", "A01", "A01B", "A01B1/00"]
+searchByName("半导体", { type: "小类" }); // 按标题子串搜索,结果含 H10D
+byVersion("2026.01"); // 2026.01 版生效的条目
+countByType(); // 各层级条目数
 ```
 
-Note: `ancestors` derives the chain structurally (section → class → subclass →
-main group) and returns an empty array for codes that do not exist in the
-dictionary. Subgroup-to-subgroup nesting is not recorded in IPC data and
-cannot be derived. `searchByName` throws a `TypeError` for empty or
-whitespace-only terms. Entries and arrays returned by the API are frozen —
-mutable access throws in strict mode.
+- `ancestors` 按结构推导到主组为止,分组之间的嵌套在数据中没有记录;代码不存在
+  时返回空数组。
+- `searchByName` 的搜索词为空或纯空白时抛出 `TypeError`。
+- 条目是冻结对象,类型为 `readonly`。`allIpc()` 返回全量共享数组,其余函数返回
+  新数组。
 
-## SEI API (`cn-patent-ipc/sei`)
+## SEI API
 
 ```ts
 import { seiOfIpc, ipcOfSei, seiRulesByCode } from "cn-patent-ipc/sei";
 
-seiOfIpc("A01B"); // SEI rules hitting this exact IPC code
-ipcOfSei("2.1"); // IPC entries mapped to industry code "2.1"
-seiRulesByCode("1.1"); // keyword rules — one industry code has several
+seiOfIpc("A01B"); // 命中该 IPC 号的 SEI 规则
+ipcOfSei("2.1"); // 映射到产业代码 2.1 的 IPC 条目
+seiRulesByCode("1.1"); // 该产业代码的全部关键词规则
 ```
 
-Mapping matches **exact** IPC codes; expand hierarchically with `ancestors` /
-`allIpc` if you need subclass-level coverage.
+映射只做精确匹配。需要按小类覆盖时,自行用 `ancestors` 或 `allIpc` 展开。
 
-## Raw data and SQL seeds
+## 原始数据与 SQL 种子
 
-Subpath imports expose the raw files:
+- `cn-patent-ipc/data/{ipc,sei,ipc-sei}.jsonl`:规范数据,每行一个 JSON 对象,
+  已排序。
+- `cn-patent-ipc/sql/postgresql/{patent_ipc,patent_sei,patent_ipc_sei}.sql`:
+  PostgreSQL 种子,自带建表语句与索引。先导入 `patent_ipc` 和 `patent_sei`,再
+  导入 `patent_ipc_sei`。
 
-- `cn-patent-ipc/data/{ipc,sei,ipc-sei}.jsonl` — canonical datasets, one JSON
-  object per line, sorted
-- `cn-patent-ipc/sql/postgresql/{patent_ipc,patent_sei,patent_ipc_sei}.sql` —
-  self-contained seeds with `CREATE TABLE IF NOT EXISTS` DDL, indexes and
-  batched `INSERT`s; load `patent_ipc` and `patent_sei` before
-  `patent_ipc_sei` (FK dependencies). Regenerate with `npm run generate:sql`
+种子可重复导入:按主键 upsert,新版会更新有变化的行,但不会删除旧行。自行建表
+时,`code` 和 `id` 须有主键或唯一约束。文件路径可用
+`require.resolve("cn-patent-ipc/sql/postgresql/patent_ipc.sql")` 取得,ESM 中
+先用 `createRequire` 创建 `require`。
 
-```ts
-import { createRequire } from "node:module";
-const require = createRequire(import.meta.url);
-const sqlPath = require.resolve("cn-patent-ipc/sql/postgresql/patent_ipc.sql");
-```
+## 许可
 
-## Updating the data
-
-Edit the JSONL, regenerate the SQL, bump the version, and update `DATA_VERSION`
-in `src/types.ts` to the newest edition present. Tests pin row counts, type
-counts, foreign keys and the JSONL ↔ SQL row counts, so an inconsistent update
-fails CI.
-
-## License
-
-MIT for code and this compilation. Data provenance (WIPO/CNIPA sources),
-quirks and exclusions: [NOTICE.md](NOTICE.md).
+MIT。数据来源、已知瑕疵与未收录内容见 [NOTICE.md](NOTICE.md)。
